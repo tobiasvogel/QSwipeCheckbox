@@ -1,0 +1,185 @@
+/ *!
+	\page index.html
+	\title QSwipeCheckbox Reference Documentation
+* /
+
+/ *!
+	\class QSwipeCheckbox
+	\brief Flippable-Style Checkbox for the Qt Framework
+* /
+
+/ *!
+		\property QSwipeCheckbox::activeBackgroundColor
+* /
+
+/ *!
+		\property QSwipeCheckbox::inactiveBackgroundColor
+* /
+
+/ *!
+		\property QSwipeCheckbox::activeTextColor
+* /
+
+/ *!
+		\property QSwipeCheckbox::inactiveTextColor
+* /
+
+/ *!
+		\property QSwipeCheckbox::borderColor
+* /
+
+/ *!
+		\property QSwipeCheckbox::activeSwitchKnobColor
+* /
+
+/ *!
+		\property QSwipeCheckbox::inactiveSwitchKnobColor
+* /
+
+/ *!
+		\property QSwipeCheckbox::activeText
+* /
+
+/ *!
+		\property QSwipeCheckbox::inactiveText
+* /
+
+/ *!
+		\property QSwipeCheckbox::borderWidth 
+* /
+
+/ *!
+		\property QSwipeCheckbox::switchKnobSize
+* /
+
+/ *!
+		\property QSwipeCheckbox::m_size
+* /
+
+/ *!
+		\property QSwipeCheckbox::animationSpeed
+* /
+
+/ *!
+		\property QSwipeCheckbox::activeTextFont
+* /
+
+/ *!
+		\property QSwipeCheckbox::inactiveTextFont
+* /
+
+/ *!
+		\property QSwipeCheckbox::checkState
+* /
+
+/ *!
+		\property QSwipeCheckbox::m_animationState
+* /
+
+/ *!
+		\property QSwipeCheckbox::m_renderBackgroundColor
+* /
+
+/ *!
+		\property QSwipeCheckbox::m_renderKnobColor
+* /
+
+/ *!
+		\property QSwipeCheckbox::enabled
+* /
+
+public:
+    explicit QSwipeCheckbox(QWidget *parent = nullptr);
+    ~QSwipeCheckbox();
+
+    QSize sizeHint() const override;
+    QSize minimumSizeHint() const override;
+
+    Qt::CheckState checkState() const;
+    void setCheckState(Qt::CheckState state);
+    void setCheckState(int state);
+
+    void setChecked(bool ch);
+    bool isChecked(void);
+
+    void setEnabled(bool en);
+    bool isEnabled(void) const;
+
+    void setActiveText(QString text);
+    void setInactiveText(QString text);
+
+    QString activeText(void) const;
+    QString inactiveText(void) const;
+
+    int borderWidth(void) const;
+    void setBorderWidth(int width = 1);
+
+    int switchKnobSize(void) const;
+    void setSwitchKnobSize(int diameter = 8);
+
+    void setActiveColors(QColor backgroundColor, QColor textColor);
+    void setInactiveColors(QColor backgroundColor, QColor textColor);
+
+    void setActiveBackgroundColor(QColor color);
+    void setInactiveBackgroundColor(QColor color);
+    void setActiveTextColor(QColor color);
+    void setInactiveTextColor(QColor color);
+    void setBorderColor(QColor color);
+    void setActiveSwitchKnobColor(QColor color);
+    void setInactiveSwitchKnobColor(QColor color);
+
+    void setRenderBackgroundColor(QColor color);
+    void setRenderKnobColor(QColor color);
+
+    QColor getActiveBackgroundColor(void) const;
+    QColor getActiveTextColor(void) const;
+    QColor getInactiveBackgroundColor(void) const;
+    QColor getInactiveTextColor(void) const;
+    QColor getBorderColor(void) const;
+    QColor getActiveSwitchKnobColor(void) const;
+    QColor getInactiveSwitchKnobColor(void) const;
+
+    QColor renderBackgroundColor(void) const;
+    QColor renderKnobColor(void) const;
+
+    void setColors(QColor borderColor, QColor activeBackgroundColor, QColor activeTextColor, QColor inactiveBackgroundColor, QColor inactiveTextColor);
+
+    void setAnimationSpeed(int milliseconds = 330);
+
+    QFont activeTextFont(void) const;
+    QFont inactiveTextFont(void) const;
+
+    void setActiveTextFont(const QFont &font);
+    void setInactiveTextFont(const QFont &font);
+
+    void setWidth(int width);
+    void setHeight(int height);
+    void setSize(int width, int height);
+    void setSize(const QSize &size);
+
+    QSize getSize(void) const;
+
+    int animationSpeed(void) const;
+
+    void runAnimation();
+
+    float animationState(void) const;
+    void setAnimationState(float state);
+
+Q_SIGNALS:
+    void sizeChanged(QSize);
+    void stateChanged(Qt::CheckState);
+
+
+protected:
+    void paintEvent(QPaintEvent *) override;
+    void mouseMoveEvent(QMouseEvent *event) override;
+    void mousePressEvent(QMouseEvent *event) override;
+    void mouseReleaseEvent(QMouseEvent *event) override;
+    void resizeEvent(QResizeEvent *event) override;
+
+protected Q_SLOTS:
+    void animationStopped(void);
+
+private:
+    void paintMovableElements(QPainterPath &clippingPath);
