@@ -1,0 +1,20 @@
+include(#QT_INSTALL_DOCS#/global/qt-module-defaults-online.qdocconf)
+include(#QT_INSTALL_DOCS#/global/compat.qdocconf)
+
+
+project                 = QSwipeCheckbox
+description             = QSwipeCheckbox Reference Documentation
+url                     = https://github.com/tobiasvogel/QSwipeCheckbox
+version			= #VERSION_STRING#
+
+headerdirs		= #INPUT_DIR#/
+sourcedirs              = #INPUT_DIR#/
+
+sources.fileextensions  = "*.cpp *.qdoc"
+headers.fileextensions  = "*.h"
+
+excludefiles		= #INPUT_DIR#/qswipecheckboxdesignerplugin.h \
+			  #INPUT_DIR#/qswipecheckboxdesignerplugin.cpp
+
+outputdir               = #OUTPUT_DIR#/html
+outputformats           = HTML
