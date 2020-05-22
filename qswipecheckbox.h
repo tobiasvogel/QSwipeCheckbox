@@ -223,7 +223,7 @@ private:
     float m_animationState;
     bool m_enabled;
     bool m_initialized = false;
-    DisplayStyle m_displayStyle;
+    DisplayStyle m_displayStyle = DisplayStyle::Classic;
     ClickableArea m_clickableArea = ClickableArea::Knob;
 
 };
