@@ -175,9 +175,9 @@ void QSwipeCheckbox::setCheckState(Qt::CheckState state)
 
     */
     if (state == Qt::Checked) {
-        m_checkState = true;
+        this->setChecked(true);
     } else if (state == Qt::Unchecked) {
-        m_checkState = false;
+        this->setChecked(false);
     } else {
         return;
     }
@@ -191,9 +191,9 @@ void QSwipeCheckbox::setCheckState(int state)
 
     */
     if (state == Qt::Unchecked) {
-        m_checkState = false;
+        this->setChecked(false);
     } else if (state == Qt::Checked) {
-        m_checkState = true;
+        this->setChecked(true);
     } else {
         return;
     }
@@ -207,6 +207,12 @@ void QSwipeCheckbox::setChecked(bool checked)
 
     */
     m_checkState = checked;
+    m_initialized = false;
+    if (checked == true) {
+        m_animationState = 100.00;
+    } else {
+        m_animationState = 0.00;
+    }
     this->repaint();
 }
 
@@ -1190,8 +1196,8 @@ void QSwipeCheckbox::paintClassicStyleSwitchElements(QPainter &p, QPainterPath &
 
     float vcenter = static_cast<float>(m_widgetRadius);
 
-    p.setPen(m_renderBorderColor);
-    p.setBrush(m_renderBorderColor);
+    p.setPen(m_renderKnobBorderColor);
+    p.setBrush(m_renderKnobBorderColor);
 
     QRectF knobEllipseBorder;
     knobEllipseBorder.setRect(0,0,m_switchKnobSize,m_switchKnobSize);
