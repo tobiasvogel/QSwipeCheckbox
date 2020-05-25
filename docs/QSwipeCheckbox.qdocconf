@@ -1,4 +1,4 @@
-include(#QT_INSTALL_DOCS#/global/qt-module-defaults-online.qdocconf)
+include(#QT_INSTALL_DOCS#/global/qt-module-defaults-offline.qdocconf)
 include(#QT_INSTALL_DOCS#/global/compat.qdocconf)
 
 

@@ -5,7 +5,8 @@
 #include <QEvent>
 #include <QMouseEvent>
 #include <QDebug>
-
+#include <QGraphicsDropShadowEffect>
+#include <QtMath>
 
 QSwipeCheckbox::QSwipeCheckbox(QWidget *parent) : QWidget(parent) {
     /*!
@@ -123,6 +124,13 @@ QSwipeCheckbox::QSwipeCheckbox(QWidget *parent) : QWidget(parent) {
     */
 
     this->setMouseTracking(true);
+
+    m_shadowWidget = new ShadowWidget(this);
+
+    m_shadowWidget->hide();
+
+    m_shadowWidget->setEnabled(false);
+
     this->initialize();
 }
 
@@ -510,6 +518,13 @@ void QSwipeCheckbox::setInactivePaddingColor(QColor color)
     }
 }
 
+void QSwipeCheckbox::setShadowColor(QColor color)
+{
+    if (color.isValid()) {
+        m_shadowColor = color;
+    }
+}
+
 void QSwipeCheckbox::setRenderBackgroundColor(QColor color)
 {
     m_renderBackgroundColor = color;
@@ -668,6 +683,11 @@ QColor QSwipeCheckbox::getInactivePaddingColor() const
     return m_inactivePaddingColor;
 }
 
+QColor QSwipeCheckbox::getShadowColor() const
+{
+    return m_shadowColor;
+}
+
 QColor QSwipeCheckbox::renderBackgroundColor() const
 {
     return m_renderBackgroundColor;
@@ -818,6 +838,11 @@ int QSwipeCheckbox::animationSpeed() const
     return m_animationSpeed;
 }
 
+bool QSwipeCheckbox::isAnimationRunning() const
+{
+    return m_animationIsRunning;
+}
+
 QSwipeCheckbox::DisplayStyle QSwipeCheckbox::getDisplayStyle() const
 {
     return m_displayStyle;
@@ -864,12 +889,10 @@ QString QSwipeCheckbox::getClickableAreaName() const
 {
     if (m_clickableArea == ClickableArea::Full) {
         return QStringLiteral("ClickableArea::Full");
-    } else if (m_clickableArea == ClickableArea::Text) {
-        return QStringLiteral("ClickableArea::Text");
-    } else if (m_clickableArea == ClickableArea::Knob) {
-        return QStringLiteral("ClickableArea::Knob");
-    } else if (m_clickableArea == ClickableArea::KnobAndText) {
-        return QStringLiteral("ClickableArea::KnobAndText");
+    } else if (m_clickableArea == ClickableArea::Handle) {
+        return QStringLiteral("ClickableArea::Handle");
+    } else if (m_clickableArea == ClickableArea::Custom) {
+        return QStringLiteral("ClickableArea::Custom");
     }
     return QStringLiteral();
 }
@@ -883,12 +906,96 @@ void QSwipeCheckbox::setClickableArea(QString area)
 {
     if (area == "QSwipeCheckbox::ClickableArea::Full" or area == "ClickableArea::Full" or area == "Full") {
         m_clickableArea = ClickableArea::Full;
-    } else if (area == "QSwipeCheckbox::ClickableArea::Text" or area == "ClickableArea::Text" or area == "Text") {
-        m_clickableArea = ClickableArea::Text;
-    } else if (area == "QSwipeCheckbox::ClickableArea::Knob" or area == "ClickableArea::Knob" or area == "Knob") {
-        m_clickableArea = ClickableArea::Knob;
-    } else if (area == "QSwipeCheckbox::ClickableArea::KnobAndText" or area == "ClickableArea::KnobAndText" or area == "KnobAndText") {
-        m_clickableArea = ClickableArea::KnobAndText;
+    } else if (area == "QSwipeCheckbox::ClickableArea::Handle" or area == "ClickableArea::Handle" or area == "Handle") {
+        m_clickableArea = ClickableArea::Handle;
+    } else if (area == "QSwipeCheckbox::ClickableArea::Custom" or area == "ClickableArea::Custom" or area == "Custom") {
+        m_clickableArea = ClickableArea::Custom;
+    }
+}
+
+QPainterPath QSwipeCheckbox::customClickableArea() const
+{
+    return m_customMouseRegion;
+}
+
+void QSwipeCheckbox::setCustomClickableArea(QPainterPath &ppath)
+{
+    if (!ppath.isEmpty()) {
+        m_customMouseRegion = ppath;
+        this->repaint();
+    }
+}
+
+int QSwipeCheckbox::shadowOpacity() const
+{
+    return m_shadowOpacity;
+}
+
+void QSwipeCheckbox::setShadowOpacity(int opacity)
+{
+    if (opacity >= 100) {
+        m_shadowOpacity = 100;
+    } else if (opacity <= 0) {
+        m_shadowOpacity = 0;
+    } else {
+        m_shadowOpacity = opacity;
+    }
+}
+
+int QSwipeCheckbox::getShadowSize() const
+{
+    return m_shadowSize;
+}
+
+void QSwipeCheckbox::setShadowSize(int size)
+{
+    if (size > 0) {
+        m_shadowSize = size;
+    } else if (size == 0) {
+        this->setShadowEnabled(false);
+    }
+}
+
+int QSwipeCheckbox::getShadowAngle() const
+{
+    return m_shadowAngle;
+}
+
+void QSwipeCheckbox::setShadowAngle(int angle)
+{
+    if (angle > 359) {
+        m_shadowAngle = angle % 360;
+    } else if (angle < -359) {
+        m_shadowAngle = 360 - (qAbs(angle) % 360 );
+    } else if (angle < 0) {
+        m_shadowAngle = 360 - qAbs(angle);
+    } else {
+        m_shadowAngle = angle;
+    }
+}
+
+bool QSwipeCheckbox::shadowEnabled() const
+{
+    return m_shadowEnabled;
+}
+
+void QSwipeCheckbox::setShadowEnabled(bool enabled)
+{
+    m_shadowEnabled = enabled;
+    if (enabled) { this->getShadowOffsets(); m_shadowWidget->show(); } else { m_shadowWidget->hide(); }
+    this->repaint();
+}
+
+void QSwipeCheckbox::visualizeCustomMouseRegion(bool enable, QColor color)
+{
+    m_visualizeCustomMouseRegion = enable;
+    if (m_visualizeCustomMouseRegion) {
+        if (color.isValid()) {
+          m_visualizeCustomMouseRegion = true;
+          m_visualizeCustomMouseRegionColor = color;
+        } else {
+          m_visualizeCustomMouseRegion = false;
+        }
     }
 }
 
@@ -907,6 +1014,7 @@ void QSwipeCheckbox::initialize()
         m_renderKnobColor = m_activeSwitchKnobColor;
         m_renderKnobBorderColor = m_activeSwitchBorderColor;
     }
+    getShadowOffsets();
     m_initialized = true;
 }
 
@@ -970,6 +1078,8 @@ void QSwipeCheckbox::runAnimation()
     animationGroup->addAnimation(borderAnimation);
     animationGroup->addAnimation(paddingAnimation);
 
+    emit animationStarted();
+
     animationGroup->start();
 }
 
@@ -1014,6 +1124,7 @@ void QSwipeCheckbox::paintEvent(QPaintEvent *)
 
     // ---------- DisplayStyle::Classic ---------- //
 
+    case DisplayStyle::iOS:
     case DisplayStyle::Classic: {
 
 
@@ -1071,10 +1182,7 @@ void QSwipeCheckbox::paintEvent(QPaintEvent *)
                 m_mouseHoverRegion.clear();
                 m_mouseHoverRegion.addPath(mask);
             }
-            if (m_clickableArea == ClickableArea::Text) {
-
-            }
-            if (m_clickableArea == ClickableArea::Knob) {
+            if (m_clickableArea == ClickableArea::Handle) {
                 if (m_checkState == Qt::Unchecked) {
                     m_mouseHoverRect = QRect(1+m_borderWidth,1+m_borderWidth,m_widgetDiameter-m_borderWidth-m_borderWidth,m_widgetDiameter-m_borderWidth-m_borderWidth);
                     m_mouseHoverRegion.clear();
@@ -1085,8 +1193,13 @@ void QSwipeCheckbox::paintEvent(QPaintEvent *)
                     m_mouseHoverRegion.addEllipse(m_mouseHoverRect);
                 }
             }
-            if (m_clickableArea == ClickableArea::KnobAndText) {
-
+            if (m_clickableArea == ClickableArea::Custom) {
+                m_mouseHoverRect.setTop(m_customMouseRegion.boundingRect().top());
+                m_mouseHoverRect.setLeft(m_customMouseRegion.boundingRect().left());
+                m_mouseHoverRect.setWidth(m_customMouseRegion.boundingRect().width());
+                m_mouseHoverRect.setHeight(m_customMouseRegion.boundingRect().height());
+                m_mouseHoverRegion.clear();
+                m_mouseHoverRegion = m_customMouseRegion;
             }
         }
 
@@ -1095,7 +1208,11 @@ void QSwipeCheckbox::paintEvent(QPaintEvent *)
         p.setPen(m_renderBorderColor);
         p.setBrush(m_renderBorderColor);
 
-        paintClassicStyleSwitchElements(p, innerFillPath);
+        if (m_displayStyle == DisplayStyle::Classic) {
+            paintClassicStyleSwitchElements(p, innerFillPath);
+        } else {
+            paintiOSStyleSwitchElements(p, innerFillPath);
+        }
 
     };
     break;
@@ -1103,10 +1220,10 @@ void QSwipeCheckbox::paintEvent(QPaintEvent *)
 
     // ---------- DisplayStyle::iOS ---------- //
 
-    case DisplayStyle::iOS: {
+ //   case DisplayStyle::iOS: {
 
-    };
-    break;
+ //   };
+ //   break;
 
 
     // ---------- DisplayStyle::Material ---------- //
@@ -1144,10 +1261,7 @@ void QSwipeCheckbox::paintEvent(QPaintEvent *)
                 m_mouseHoverRegion.clear();
                 m_mouseHoverRegion.addPath(mask);
             }
-            if (m_clickableArea == ClickableArea::Text) {
-
-            }
-            if (m_clickableArea == ClickableArea::Knob) {
+            if (m_clickableArea == ClickableArea::Handle) {
                 if (m_checkState == Qt::Unchecked) {
                     m_mouseHoverRect = m_knobRect;
                     m_mouseHoverRegion.clear();
@@ -1158,11 +1272,15 @@ void QSwipeCheckbox::paintEvent(QPaintEvent *)
                     m_mouseHoverRegion.addEllipse(m_mouseHoverRect);
                 }
             }
-            if (m_clickableArea == ClickableArea::KnobAndText) {
-
+            if (m_clickableArea == ClickableArea::Custom) {
+                m_mouseHoverRect.setTop(m_customMouseRegion.boundingRect().top());
+                m_mouseHoverRect.setLeft(m_customMouseRegion.boundingRect().left());
+                m_mouseHoverRect.setWidth(m_customMouseRegion.boundingRect().width());
+                m_mouseHoverRect.setHeight(m_customMouseRegion.boundingRect().height());
+                m_mouseHoverRegion.clear();
+                m_mouseHoverRegion = m_customMouseRegion;
             }
         }
-
 
         paintWindowsStyleSwitchElements(p, mask);
 
@@ -1180,7 +1298,7 @@ void QSwipeCheckbox::paintEvent(QPaintEvent *)
 
 void QSwipeCheckbox::paintClassicStyleSwitchElements(QPainter &p, QPainterPath &clippingPath) {
 
-    float distance = static_cast<float>(m_rightPosition+1) - static_cast<float>(m_leftPosition);
+    float distance = static_cast<float>(m_rightPosition) - static_cast<float>(m_leftPosition);
 
     float offset = ( distance / 100.00 * m_animationState );
 
@@ -1246,14 +1364,96 @@ void QSwipeCheckbox::paintClassicStyleSwitchElements(QPainter &p, QPainterPath &
     activeTextRect.translate(offset,0);
     p.drawText(activeTextRect, Qt::AlignCenter, m_activeText);
 
+#ifdef QT_QML_DEBUG
+    if (m_visualizeCustomMouseRegion) {
+        if (m_visualizeCustomMouseRegionColor.isValid()) {
+            p.setPen(m_visualizeCustomMouseRegionColor);
+            p.setBrush(m_visualizeCustomMouseRegionColor);
+            p.drawPath(m_customMouseRegion);
+        }
+    }
+#endif
 }
 
 void QSwipeCheckbox::paintiOSStyleSwitchElements(QPainter &p, QPainterPath &clippingPath) {
 
-    // NOT IMPLEMENTED YET
-
-    std::ignore = p;
     std::ignore = clippingPath;
+
+    float distance = static_cast<float>(m_rightPosition) - static_cast<float>(m_leftPosition);
+
+    float offset = ( distance / 100.00 * m_animationState );
+
+    float knobPosition = static_cast<float>(m_leftPosition) + offset;
+
+    QPainterPath activeTextClipping;
+    QPainterPath inactiveTextClipping;
+
+    QPainterPath fontMask;
+
+    QPainterPath fontKnobMask;
+    fontKnobMask.addEllipse(m_knobRect.translated(offset,0));
+
+    float vcenter = static_cast<float>(m_widgetRadius);
+
+    p.setPen(m_renderBorderColor);
+    p.setBrush(m_renderBorderColor);
+
+    int knobSize = m_widgetDiameter;
+
+    QRectF knobEllipseBorder;
+    knobEllipseBorder.setRect(0,0,knobSize,knobSize);
+    knobEllipseBorder.moveCenter(QPointF(knobPosition+1,vcenter+1));
+
+    p.drawEllipse(knobEllipseBorder);
+
+    p.setPen(m_renderKnobColor);
+    p.setBrush(m_renderKnobColor);
+
+    int innerKnobSize = m_widgetDiameter-m_borderWidth-m_borderWidth;
+
+    if (m_shadowEnabled) {
+
+        m_shadowWidget->setGeometry(m_borderWidth+offset+1,m_borderWidth+1,innerKnobSize,innerKnobSize);
+        m_shadowWidget->setGradientAColor(m_renderKnobColor);
+        m_shadowWidget->setGradientBColor(m_renderKnobColor.darker(108));
+        m_shadowWidget->show();
+
+        m_shadowEffect = new QGraphicsDropShadowEffect(this);
+        m_shadowEffect->setXOffset(m_shadowPoint.x());
+        m_shadowEffect->setYOffset(m_shadowPoint.y());
+        if (m_shadowColor.isValid()) {
+            if (m_shadowOpacity > 0 and m_shadowOpacity <= 100) {
+                m_shadowEffect->setColor(QColor(m_shadowColor.red(),m_shadowColor.green(),m_shadowColor.blue(),(m_shadowOpacity*2.55)));
+            } else {
+                m_shadowEffect->setColor(QColor(m_shadowColor.red(),m_shadowColor.green(),m_shadowColor.blue()));
+            }
+        } else {
+                m_shadowEffect->setColor(QColor(63, 63, 63, 127));
+        }
+        m_shadowEffect->setBlurRadius((m_shadowSize>m_borderWidth?m_borderWidth:m_shadowSize));
+        m_shadowEffect->setEnabled(true);
+        m_shadowWidget->setGraphicsEffect(m_shadowEffect);
+
+    } else {
+
+    QRectF innerKnobEllipse;
+    innerKnobEllipse.setRect(0,0,innerKnobSize,innerKnobSize);
+    innerKnobEllipse.moveCenter(QPointF(knobPosition+1,vcenter+1));
+
+    p.drawEllipse(innerKnobEllipse);
+
+}
+
+
+#ifdef QT_QML_DEBUG
+    if (m_visualizeCustomMouseRegion) {
+        if (m_visualizeCustomMouseRegionColor.isValid()) {
+            p.setPen(m_visualizeCustomMouseRegionColor);
+            p.setBrush(m_visualizeCustomMouseRegionColor);
+            p.drawPath(m_customMouseRegion);
+        }
+    }
+#endif
 
 }
 
@@ -1263,6 +1463,16 @@ void QSwipeCheckbox::paintMaterialStyleSwitchElements(QPainter &p, QPainterPath 
 
     std::ignore = p;
     std::ignore = clippingPath;
+
+#ifdef QT_QML_DEBUG
+    if (m_visualizeCustomMouseRegion) {
+        if (m_visualizeCustomMouseRegionColor.isValid()) {
+            p.setPen(m_visualizeCustomMouseRegionColor);
+            p.setBrush(m_visualizeCustomMouseRegionColor);
+            p.drawPath(m_customMouseRegion);
+        }
+    }
+#endif
 
 }
 
@@ -1360,6 +1570,16 @@ void QSwipeCheckbox::paintWindowsStyleSwitchElements(QPainter &p, QPainterPath &
 
     p.drawPath(knobRect);
 
+#ifdef QT_QML_DEBUG
+    if (m_visualizeCustomMouseRegion) {
+        if (m_visualizeCustomMouseRegionColor.isValid()) {
+            p.setPen(m_visualizeCustomMouseRegionColor);
+            p.setBrush(m_visualizeCustomMouseRegionColor);
+            p.drawPath(m_customMouseRegion);
+        }
+    }
+#endif
+
 }
 
 void QSwipeCheckbox::mouseMoveEvent(QMouseEvent *event)
@@ -1454,7 +1674,7 @@ void QSwipeCheckbox::resizeEvent(QResizeEvent *event)
 
     m_widgetSize = QSize(width, height);
 
-    if (m_displayStyle == DisplayStyle::Classic) {
+    if (m_displayStyle == DisplayStyle::Classic or m_displayStyle == DisplayStyle::iOS) {
 
         m_widgetDiameter = m_widgetSize.height();
 
@@ -1465,9 +1685,6 @@ void QSwipeCheckbox::resizeEvent(QResizeEvent *event)
         m_rightPosition = m_widgetSize.width() - m_widgetRadius;
 
         m_knobRect = QRect(1+m_borderWidth,1+m_borderWidth,m_widgetDiameter-m_borderWidth-m_borderWidth,m_widgetDiameter-m_borderWidth-m_borderWidth);
-
-    }
-    if (m_displayStyle == DisplayStyle::iOS) {
 
     }
     if (m_displayStyle == DisplayStyle::Material) {
@@ -1492,6 +1709,14 @@ void QSwipeCheckbox::resetColors(void)
     this->repaint();
 }
 
+void QSwipeCheckbox::getShadowOffsets()
+{
+    int x = m_shadowSize * qCos(qDegreesToRadians(static_cast<double>(m_shadowAngle)));
+    int y = m_shadowSize * qSin(qDegreesToRadians(static_cast<double>(m_shadowAngle)));
+
+    m_shadowPoint = QPoint(x,y);
+}
+
 void QSwipeCheckbox::animationStopped()
 {
     m_animationIsRunning = false;
@@ -1499,4 +1724,5 @@ void QSwipeCheckbox::animationStopped()
         this->setCursor(Qt::PointingHandCursor);
     }
     this->repaint();
+    emit animationFinished();
 }

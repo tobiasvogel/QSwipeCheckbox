@@ -1,0 +1,292 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>ScreenExample</class>
+ <widget class="QMainWindow" name="ScreenExample">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>406</width>
+    <height>600</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>ScreenExample</string>
+  </property>
+  <widget class="QWidget" name="centralwidget">
+   <property name="styleSheet">
+    <string notr="true">background-color: #ffffff;</string>
+   </property>
+   <widget class="QLabel" name="batteryIcon">
+    <property name="geometry">
+     <rect>
+      <x>310</x>
+      <y>10</y>
+      <width>81</width>
+      <height>16</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+    <property name="pixmap">
+     <pixmap resource="resources.qrc">:/icons/battery</pixmap>
+    </property>
+    <property name="scaledContents">
+     <bool>true</bool>
+    </property>
+   </widget>
+   <widget class="QLabel" name="localTimeLabel">
+    <property name="geometry">
+     <rect>
+      <x>20</x>
+      <y>10</y>
+      <width>67</width>
+      <height>17</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">background-color: #fafafc;</string>
+    </property>
+    <property name="text">
+     <string notr="true">00:00</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="backIcon">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>50</y>
+      <width>20</width>
+      <height>33</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string notr="true"/>
+    </property>
+    <property name="pixmap">
+     <pixmap resource="resources.qrc">:/icons/back</pixmap>
+    </property>
+    <property name="scaledContents">
+     <bool>true</bool>
+    </property>
+   </widget>
+   <widget class="QLabel" name="backLabel">
+    <property name="geometry">
+     <rect>
+      <x>40</x>
+      <y>40</y>
+      <width>67</width>
+      <height>50</height>
+     </rect>
+    </property>
+    <property name="autoFillBackground">
+     <bool>false</bool>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">background-color: #fafafc;</string>
+    </property>
+    <property name="text">
+     <string notr="true">Back</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="exampleLabel">
+    <property name="geometry">
+     <rect>
+      <x>0</x>
+      <y>42</y>
+      <width>401</width>
+      <height>50</height>
+     </rect>
+    </property>
+    <property name="autoFillBackground">
+     <bool>false</bool>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">background-color: #fafafc;</string>
+    </property>
+    <property name="text">
+     <string notr="true">Example</string>
+    </property>
+    <property name="alignment">
+     <set>Qt::AlignCenter</set>
+    </property>
+   </widget>
+   <widget class="QFrame" name="frame">
+    <property name="geometry">
+     <rect>
+      <x>-20</x>
+      <y>100</y>
+      <width>436</width>
+      <height>120</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">background-color: #f1f2f7;
+border-bottom: 1px solid #e5e6ea;
+border-top: 1px solid #d3d4d8;</string>
+    </property>
+    <property name="frameShape">
+     <enum>QFrame::Box</enum>
+    </property>
+    <property name="frameShadow">
+     <enum>QFrame::Plain</enum>
+    </property>
+    <widget class="QLabel" name="upperInfoLabel">
+     <property name="geometry">
+      <rect>
+       <x>36</x>
+       <y>14</y>
+       <width>371</width>
+       <height>61</height>
+      </rect>
+     </property>
+     <property name="sizePolicy">
+      <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+       <horstretch>0</horstretch>
+       <verstretch>0</verstretch>
+      </sizepolicy>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">color: #56555a;
+border: none;</string>
+     </property>
+     <property name="lineWidth">
+      <number>0</number>
+     </property>
+     <property name="text">
+      <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;For the full iOS-like experience, there is a subtile color-gradient and a shadow-effect applied to the QSwipeCheckbox widget.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+     </property>
+     <property name="alignment">
+      <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignTop</set>
+     </property>
+     <property name="wordWrap">
+      <bool>true</bool>
+     </property>
+     <property name="textInteractionFlags">
+      <set>Qt::NoTextInteraction</set>
+     </property>
+    </widget>
+   </widget>
+   <widget class="QFrame" name="frame_2">
+    <property name="geometry">
+     <rect>
+      <x>-20</x>
+      <y>290</y>
+      <width>436</width>
+      <height>223</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">background-color: #f1f2f7;
+border-bottom: 1px solid #e5e6ea;
+border-top: 1px solid #d3d4d8;</string>
+    </property>
+    <property name="frameShape">
+     <enum>QFrame::Box</enum>
+    </property>
+    <property name="frameShadow">
+     <enum>QFrame::Plain</enum>
+    </property>
+    <widget class="QLabel" name="lowerInfoLabel">
+     <property name="geometry">
+      <rect>
+       <x>36</x>
+       <y>14</y>
+       <width>371</width>
+       <height>201</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">color: #56555a;
+border: none;</string>
+     </property>
+     <property name="lineWidth">
+      <number>0</number>
+     </property>
+     <property name="text">
+      <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Please be aware that the rendering of the widget may become slow on some devices using these effects enabled by the &amp;quot;&lt;span style=&quot; font-family:'monospace';&quot;&gt;setShadowEnabled(&lt;/span&gt;&lt;span style=&quot; font-family:'monospace'; font-weight:600; font-style:italic;&quot;&gt;true&lt;/span&gt;&lt;span style=&quot; font-family:'monospace';&quot;&gt;)&lt;/span&gt;&amp;quot; function.&lt;/p&gt;&lt;p&gt;However, even with &amp;quot;&lt;span style=&quot; font-family:'monospace';&quot;&gt;setShadowEnabled(&lt;/span&gt;&lt;span style=&quot; font-family:'monospace'; font-weight:600; font-style:italic;&quot;&gt;false&lt;/span&gt;&lt;span style=&quot; font-family:'monospace';&quot;&gt;)&lt;/span&gt;&amp;quot; you will still get a very convincing QSwipeCheckbox!&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+     </property>
+     <property name="alignment">
+      <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignTop</set>
+     </property>
+     <property name="wordWrap">
+      <bool>true</bool>
+     </property>
+     <property name="textInteractionFlags">
+      <set>Qt::NoTextInteraction</set>
+     </property>
+    </widget>
+   </widget>
+   <widget class="QFrame" name="frame_3">
+    <property name="geometry">
+     <rect>
+      <x>-20</x>
+      <y>-10</y>
+      <width>436</width>
+      <height>111</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">background-color: #fafafc;
+border-bottom: 1px solid #e5e6ea;
+border-top: 1px solid #d3d4d8;</string>
+    </property>
+    <property name="frameShape">
+     <enum>QFrame::Box</enum>
+    </property>
+    <property name="frameShadow">
+     <enum>QFrame::Plain</enum>
+    </property>
+   </widget>
+   <widget class="QLabel" name="exampleText">
+    <property name="geometry">
+     <rect>
+      <x>14</x>
+      <y>230</y>
+      <width>281</width>
+      <height>51</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string notr="true">iOS-13 Style QSwipeCheckbox</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="quitButton">
+    <property name="geometry">
+     <rect>
+      <x>46</x>
+      <y>534</y>
+      <width>312</width>
+      <height>42</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">background: url(&quot;:/images/button&quot;);
+color: #ffffff;
+</string>
+    </property>
+    <property name="text">
+     <string notr="true">Close Example</string>
+    </property>
+    <property name="flat">
+     <bool>true</bool>
+    </property>
+   </widget>
+   <zorder>frame_3</zorder>
+   <zorder>exampleLabel</zorder>
+   <zorder>batteryIcon</zorder>
+   <zorder>localTimeLabel</zorder>
+   <zorder>backIcon</zorder>
+   <zorder>backLabel</zorder>
+   <zorder>frame</zorder>
+   <zorder>frame_2</zorder>
+   <zorder>exampleText</zorder>
+   <zorder>quitButton</zorder>
+  </widget>
+ </widget>
+ <resources>
+  <include location="resources.qrc"/>
+ </resources>
+ <connections/>
+</ui>

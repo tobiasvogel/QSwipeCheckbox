@@ -1,0 +1,13 @@
+<RCC>
+    <qresource prefix="/icons">
+        <file alias="back">back_icon.png</file>
+        <file alias="battery">battery_icon.png</file>
+    </qresource>
+    <qresource prefix="/fonts">
+        <file>SF-Pro-Display-Regular.otf</file>
+        <file>SF-Pro-Display-Semibold.otf</file>
+    </qresource>
+    <qresource prefix="/images">
+        <file alias="button">button.png</file>
+    </qresource>
+</RCC>

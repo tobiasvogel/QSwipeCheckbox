@@ -4,9 +4,70 @@
 #include <QObject>
 #include <QWidget>
 #include <QAbstractButton>
-#include <QMetaEnum>
+#include <QGraphicsEffect>
+#include <QPaintEvent>
+#include <QPainter>
+#include <QDebug>
 
 QT_BEGIN_NAMESPACE
+
+class ShadowWidget : public QWidget
+{
+    Q_OBJECT
+public:
+    explicit ShadowWidget(QWidget *parent = nullptr) { this->setParent(parent); this->setMouseTracking(true); }
+
+    QSize sizeHint() const override {return QSize(8,8);}
+    QSize minimumSizeHint() const override {return QSize(4,4);}
+
+    void setGradientAColor(QColor color) { if (color.isValid()) { m_gradientAColor = color;}}
+    void setGradientBColor(QColor color) { if (color.isValid()) { m_gradientBColor = color; }}
+    void setForegroundColor(QColor color) { if (color.isValid()) { m_gradientAColor = color; m_gradientBColor = color; }}
+
+    void setSize(QSizeF size) { if (size.width() > 0 and size.height() > 0) { m_size.setWidth(size.width()); m_size.setHeight(size.height()); }}
+    void setSize(QSize size) { if (size.width() > 0 and size.height() > 0) { m_size.setWidth(size.width()); m_size.setHeight(size.height()); }}
+    void setSize(qreal width, qreal height) { if (width > 0 and height > 0) { m_size.setWidth(width); m_size.setHeight(height); }}
+
+    QSizeF size(void) const { return m_size; }
+
+private:
+    void paintEvent(QPaintEvent *event) override {
+        QPainter p(this);
+        p.setPen(Qt::NoPen);
+
+        p.setRenderHints(QPainter::Antialiasing|QPainter::SmoothPixmapTransform, true);
+
+        QPainterPath scene;
+        scene.addRect(0,0,this->width(),this->height());
+        QPainterPath mask;
+
+        mask.setFillRule(Qt::WindingFill);
+        mask.addEllipse(0,0,this->width(),this->height());
+        mask = scene.intersected(mask);
+        p.setClipPath(mask);
+
+
+        if (m_gradientAColor == m_gradientBColor) {
+            p.setBrush(m_gradientAColor);
+            p.drawRect(0,0,this->width(),this->height());
+        } else {
+            QLinearGradient gradient(QPointF(0,0),QPointF(0,this->height()));
+            gradient.setColorAt(0,m_gradientAColor);
+            gradient.setColorAt(1,m_gradientBColor);
+            p.fillRect(QRectF(0,0,this->width(),this->height()),gradient);
+        }
+
+        event->accept();
+    }
+    void resizeEvent(QResizeEvent *event) override { event->accept(); }
+
+    QColor m_gradientAColor;
+    QColor m_gradientBColor;
+    QSizeF m_size;
+
+    friend class QSWipeCheckbox;
+};
+
 
 class QSwipeCheckbox : public QWidget
 {
@@ -23,11 +84,16 @@ class QSwipeCheckbox : public QWidget
     Q_PROPERTY(QColor inactiveSwitchKnobColor READ getInactiveSwitchKnobColor WRITE setInactiveSwitchKnobColor DESIGNABLE true)
     Q_PROPERTY(QColor activePaddingColor READ getActivePaddingColor WRITE setActivePaddingColor DESIGNABLE true)
     Q_PROPERTY(QColor inactivePaddingColor READ getInactivePaddingColor WRITE setInactivePaddingColor DESIGNABLE true)
+    Q_PROPERTY(QColor shadowColor READ getShadowColor WRITE setShadowColor DESIGNABLE true)
     Q_PROPERTY(QString activeText READ activeText WRITE setActiveText DESIGNABLE true)
     Q_PROPERTY(QString inactiveText READ inactiveText WRITE setInactiveText DESIGNABLE true)
     Q_PROPERTY(int borderWidth READ borderWidth WRITE setBorderWidth DESIGNABLE true)
     Q_PROPERTY(int paddingWidth READ paddingWidth WRITE setPaddingWidth DESIGNABLE true)
     Q_PROPERTY(int switchKnobSize READ switchKnobSize WRITE setSwitchKnobSize DESIGNABLE true)
+    Q_PROPERTY(int shadowOpacity READ shadowOpacity WRITE setShadowOpacity DESIGNABLE true)
+    Q_PROPERTY(int shadowAngle READ getShadowAngle WRITE setShadowAngle DESIGNABLE true)
+    Q_PROPERTY(int shadowSize READ getShadowSize WRITE setShadowSize DESIGNABLE true)
+    Q_PROPERTY(bool shadowEnabled READ shadowEnabled WRITE setShadowEnabled DESIGNABLE true)
     Q_PROPERTY(QSize size READ getSize WRITE setSize NOTIFY sizeChanged DESIGNABLE false USER false)
     Q_PROPERTY(int animationSpeed READ animationSpeed WRITE setAnimationSpeed DESIGNABLE true)
     Q_PROPERTY(QFont activeTextFont READ activeTextFont WRITE setActiveTextFont DESIGNABLE true)
@@ -45,7 +111,7 @@ class QSwipeCheckbox : public QWidget
 
 public:
     enum DisplayStyle { Classic, iOS, Material, Windows };
-    enum ClickableArea { Full, Text, Knob, KnobAndText };
+    enum ClickableArea { Full, Handle, Custom };
     Q_ENUM(DisplayStyle)
     Q_ENUM(ClickableArea)
 
@@ -95,6 +161,7 @@ public:
     void setInactiveSwitchKnobColor(QColor color);
     void setActivePaddingColor(QColor color);
     void setInactivePaddingColor(QColor color);
+    void setShadowColor(QColor color);
 
     QColor getActiveBackgroundColor(void) const;
     QColor getActiveTextColor(void) const;
@@ -108,6 +175,7 @@ public:
     QColor getInactiveSwitchKnobColor(void) const;
     QColor getActivePaddingColor(void) const;
     QColor getInactivePaddingColor(void) const;
+    QColor getShadowColor(void) const;
 
     void setAnimationSpeed(int milliseconds = 330);
 
@@ -126,6 +194,8 @@ public:
 
     int animationSpeed(void) const;
 
+    bool isAnimationRunning(void) const;
+
     DisplayStyle getDisplayStyle(void) const;
     QString getDisplayStyleName(void) const;
 
@@ -138,10 +208,30 @@ public:
     void setClickableArea(ClickableArea area);
     void setClickableArea(QString area);
 
+    QPainterPath customClickableArea(void) const;
+    void setCustomClickableArea(QPainterPath &ppath);
+
+    int shadowOpacity(void) const;
+    void setShadowOpacity(int opacity = 60);
+
+    int getShadowSize(void) const;
+    void setShadowSize(int size);
+
+    int getShadowAngle(void) const;
+    void setShadowAngle(int angle);
+
+    bool shadowEnabled(void) const;
+    void setShadowEnabled(bool enabled = true);
+
+#ifdef QT_DEBUG
+    void visualizeCustomMouseRegion(bool enable = false, QColor color = QColor(255,0,0,127));
+#endif
+
 Q_SIGNALS:
     void sizeChanged(QSize);
     void stateChanged(bool state);
-
+    void animationStarted(void);
+    void animationFinished(void);
 
 protected:
     void paintEvent(QPaintEvent *) override;
@@ -181,7 +271,8 @@ private:
 
     void resetColors(void);
 
-private:
+    void getShadowOffsets(void);
+
     QString m_activeText;
     QString m_inactiveText;
     QColor m_activeBackgroundColor;
@@ -201,6 +292,7 @@ private:
     QColor m_renderKnobBorderColor;
     QColor m_renderKnobColor;
     QColor m_renderPaddingColor;
+    QColor m_shadowColor;
     int m_animationSpeed;
     int m_borderWidth;
     int m_paddingWidth;
@@ -223,9 +315,20 @@ private:
     float m_animationState;
     bool m_enabled;
     bool m_initialized = false;
+    bool m_shadowEnabled;
+    int m_shadowAngle;
+    int m_shadowSize;
+    int m_shadowOpacity;
+    QPoint m_shadowPoint;
+    QPainterPath m_customMouseRegion;
     DisplayStyle m_displayStyle = DisplayStyle::Classic;
-    ClickableArea m_clickableArea = ClickableArea::Knob;
-
+    ClickableArea m_clickableArea = ClickableArea::Handle;
+    ShadowWidget *m_shadowWidget;
+    QGraphicsDropShadowEffect *m_shadowEffect;
+#ifdef QT_DEBUG
+    bool m_visualizeCustomMouseRegion = false;
+    QColor m_visualizeCustomMouseRegionColor;
+#endif
 };
 
 QT_END_NAMESPACE
