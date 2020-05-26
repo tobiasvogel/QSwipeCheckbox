@@ -1108,6 +1108,10 @@ void QSwipeCheckbox::paintEvent(QPaintEvent *)
         p.setRenderHints(QPainter::Antialiasing|QPainter::SmoothPixmapTransform, true);
     }
 
+    if (m_displayStyle == DisplayStyle::Windows or m_displayStyle == DisplayStyle::Classic) {
+        m_shadowWidget->hide();
+    }
+
     QPainterPath scene;
     scene.addRect(0,0,this->width(),this->height());
     QPainterPath mask;
@@ -1123,6 +1127,9 @@ void QSwipeCheckbox::paintEvent(QPaintEvent *)
     switch (m_displayStyle) {
 
     // ---------- DisplayStyle::Classic ---------- //
+
+
+    // ---------- DisplayStyle::iOS ---------- //
 
     case DisplayStyle::iOS:
     case DisplayStyle::Classic: {
@@ -1217,19 +1224,44 @@ void QSwipeCheckbox::paintEvent(QPaintEvent *)
     };
     break;
 
-
-    // ---------- DisplayStyle::iOS ---------- //
-
- //   case DisplayStyle::iOS: {
-
- //   };
- //   break;
-
-
     // ---------- DisplayStyle::Material ---------- //
 
     case DisplayStyle::Material: {
 
+        QRect maskRect;
+
+        maskRect.setRect(m_borderWidth,m_borderWidth,m_widgetSize.width()-m_borderWidth-m_borderWidth,m_widgetSize.height()-m_borderWidth-m_borderWidth);
+
+        mask.addRect(maskRect);
+
+        if (!m_animationIsRunning) {
+            if (m_clickableArea == ClickableArea::Full) {
+                m_mouseHoverRect = maskRect;
+                m_mouseHoverRegion.clear();
+                m_mouseHoverRegion.addPath(mask);
+            }
+            if (m_clickableArea == ClickableArea::Handle) {
+                if (m_checkState == Qt::Unchecked) {
+                    m_mouseHoverRect = m_knobRect;
+                    m_mouseHoverRegion.clear();
+                    m_mouseHoverRegion.addEllipse(m_mouseHoverRect);
+                } else {
+                    m_mouseHoverRect = m_knobRect.translated(m_rightPosition-m_leftPosition,0);
+                    m_mouseHoverRegion.clear();
+                    m_mouseHoverRegion.addEllipse(m_mouseHoverRect);
+                }
+            }
+            if (m_clickableArea == ClickableArea::Custom) {
+                m_mouseHoverRect.setTop(m_customMouseRegion.boundingRect().top());
+                m_mouseHoverRect.setLeft(m_customMouseRegion.boundingRect().left());
+                m_mouseHoverRect.setWidth(m_customMouseRegion.boundingRect().width());
+                m_mouseHoverRect.setHeight(m_customMouseRegion.boundingRect().height());
+                m_mouseHoverRegion.clear();
+                m_mouseHoverRegion = m_customMouseRegion;
+            }
+        }
+
+        paintMaterialStyleSwitchElements(p, mask);
     };
     break;
 
@@ -1390,9 +1422,6 @@ void QSwipeCheckbox::paintiOSStyleSwitchElements(QPainter &p, QPainterPath &clip
 
     QPainterPath fontMask;
 
-    QPainterPath fontKnobMask;
-    fontKnobMask.addEllipse(m_knobRect.translated(offset,0));
-
     float vcenter = static_cast<float>(m_widgetRadius);
 
     p.setPen(m_renderBorderColor);
@@ -1436,6 +1465,8 @@ void QSwipeCheckbox::paintiOSStyleSwitchElements(QPainter &p, QPainterPath &clip
 
     } else {
 
+    m_shadowWidget->hide();
+
     QRectF innerKnobEllipse;
     innerKnobEllipse.setRect(0,0,innerKnobSize,innerKnobSize);
     innerKnobEllipse.moveCenter(QPointF(knobPosition+1,vcenter+1));
@@ -1459,10 +1490,67 @@ void QSwipeCheckbox::paintiOSStyleSwitchElements(QPainter &p, QPainterPath &clip
 
 void QSwipeCheckbox::paintMaterialStyleSwitchElements(QPainter &p, QPainterPath &clippingPath) {
 
-    // NOT IMPLEMENTED YET
-
-    std::ignore = p;
     std::ignore = clippingPath;
+
+    float distance = static_cast<float>(m_rightPosition) - static_cast<float>(m_leftPosition);
+
+    float offset = ( distance / 100.00 * m_animationState );
+
+    float vcenter = static_cast<float>(m_widgetSize.height()/2);
+
+    p.setPen(m_renderBackgroundColor);
+    p.setBrush(m_renderBackgroundColor);
+
+    QPainterPath slideRailPath;
+
+    float innerRadius = m_widgetRadius-m_paddingWidth;
+
+    slideRailPath.moveTo(m_rightPosition+1,vcenter-innerRadius+1);
+    slideRailPath.arcTo(QRect(m_rightPosition-innerRadius+1,vcenter-innerRadius+1,innerRadius+innerRadius,innerRadius+innerRadius), 90, -180);
+    slideRailPath.lineTo(m_leftPosition,vcenter+innerRadius+1);
+    slideRailPath.arcTo(QRect(m_leftPosition-innerRadius+1,vcenter-innerRadius+1,innerRadius+innerRadius,innerRadius+innerRadius), -90, -180);
+    slideRailPath.closeSubpath();
+
+    p.drawPath(slideRailPath);
+
+    p.setPen(m_renderKnobColor);
+    p.setBrush(m_renderKnobColor);
+
+
+    if (m_shadowEnabled) {
+
+        m_shadowWidget->setGeometry(m_borderWidth+offset+1,m_borderWidth+1,m_knobRect.width(),m_knobRect.height());
+        m_shadowWidget->setForegroundColor(m_renderKnobColor);
+        m_shadowWidget->show();
+
+        m_shadowEffect = new QGraphicsDropShadowEffect(this);
+        m_shadowEffect->setXOffset(m_shadowPoint.x()*0.5);
+        m_shadowEffect->setYOffset(m_shadowPoint.y()*0.5);
+        if (m_shadowColor.isValid()) {
+            if (m_shadowOpacity > 0 and m_shadowOpacity <= 100) {
+                m_shadowEffect->setColor(QColor(m_shadowColor.red(),m_shadowColor.green(),m_shadowColor.blue(),(m_shadowOpacity*2.55)));
+            } else {
+                m_shadowEffect->setColor(QColor(m_shadowColor.red(),m_shadowColor.green(),m_shadowColor.blue()));
+            }
+        } else {
+                m_shadowEffect->setColor(QColor(63, 63, 63, 127));
+        }
+        m_shadowEffect->setBlurRadius((m_shadowSize>m_borderWidth?m_borderWidth:m_shadowSize));
+        m_shadowEffect->setEnabled(true);
+        m_shadowWidget->setGraphicsEffect(m_shadowEffect);
+
+    } else {
+
+        m_shadowWidget->hide();
+
+        QRectF knobEllipse;
+        knobEllipse.setRect(0,0,m_knobRect.width(),m_knobRect.height());
+        knobEllipse.moveCenter(QPointF(m_leftPosition+offset+1,vcenter+1));
+
+        p.drawEllipse(knobEllipse);
+
+    }
+
 
 #ifdef QT_QML_DEBUG
     if (m_visualizeCustomMouseRegion) {
@@ -1688,6 +1776,16 @@ void QSwipeCheckbox::resizeEvent(QResizeEvent *event)
 
     }
     if (m_displayStyle == DisplayStyle::Material) {
+
+        m_widgetDiameter = m_widgetSize.height()-m_borderWidth-m_borderWidth;
+
+        m_widgetRadius = (m_widgetDiameter / 2);
+
+        m_leftPosition = m_borderWidth+m_widgetRadius;
+
+        m_rightPosition = m_widgetSize.width()-m_borderWidth-m_widgetRadius;
+
+        m_knobRect = QRect(1+m_borderWidth,1+m_borderWidth,m_widgetDiameter,m_widgetDiameter);
 
     }
     if (m_displayStyle == DisplayStyle::Windows) {
