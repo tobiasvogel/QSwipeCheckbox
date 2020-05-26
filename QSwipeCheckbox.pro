@@ -51,7 +51,7 @@ write_file($$version.target, version_h_data)
 
 
 target.path = $$[QT_INSTALL_PLUGINS]/designer
-INSTALLS += target
+INSTALLS += target docs
 
 RESOURCES += \
     resources.qrc
@@ -70,11 +70,16 @@ write_file($${OUT_PWD}/docs/QSwipeCheckbox.qdocconf, QDOCCONFOUT)
 docs.target = $${OUT_PWD}/docs
 
 QTWIDGETS_INCLUDE = $$system(pkg-config --cflags-only-I Qt5Widgets)
-docs.commands = qdoc -I $${PWD} $${QTWIDGETS_INCLUDE} $${OUT_PWD}/docs/QSwipeCheckbox.qdocconf
-
+docs.path = $$[QT_INSTALL_PLUGINS]/designer/QSwipeCheckbox/docs/
+docs.commands = QT_VERSION=$${QT_VERSION} QT_VER=$${QT_VERSION} QT_VERSION_TAG=$${QT_VERSION} BUILDDIR=$${OUT_PWD} qdoc -I $${PWD} $${QTWIDGETS_INCLUDE} $${OUT_PWD}/docs/QSwipeCheckbox.qdocconf
+DOCSOUTPUT = "all: docs"
+DOCSOUTPUT += $$escape_expand("\n")
+DOCSOUTPUT += "docs:"
+DOCSOUTPUT += $$escape_expand("\t$${docs.commands}")
+DOCSOUTPUT += $$escape_expand("\n\nclean:")
+DOCSOUTPUT += $$escape_expand("\t-rm -rf ./html")
+write_file($${OUT_PWD}/docs/Makefile, DOCSOUTPUT)
 
 QMAKE_EXTRA_TARGETS += docs version
 
 PRE_TARGETDEPS += version.h
-
-POST_TARGETDEPS += docs

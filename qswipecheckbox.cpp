@@ -45,8 +45,13 @@ QSwipeCheckbox::QSwipeCheckbox(QWidget *parent) : QWidget(parent) {
     */
 
     /*!
-        \property QSwipeCheckbox::borderColor()
-        \brief This property holds the Border Color for the QSwipeCheckbox.
+        \property QSwipeCheckbox::activeBorderColor()
+        \brief This property holds the Border Color for the active state.
+    */
+
+    /*!
+        \property QSwipeCheckbox::inactiveBorderColor()
+        \brief This property holds the Border Color for the inctive state.
     */
 
     /*!
@@ -122,6 +127,90 @@ QSwipeCheckbox::QSwipeCheckbox(QWidget *parent) : QWidget(parent) {
 
         This property's default is true.
     */
+    /*!
+          \property QSwipeCheckbox::activeSwitchBorderColor()
+        \brief This property...
+
+    */
+
+    /*!
+          \property QSwipeCheckbox::inactiveSwitchBorderColor()
+        \brief This property...
+
+    */
+
+    /*!
+          \property QSwipeCheckbox::activePaddingColor()
+        \brief This property...
+
+    */
+
+    /*!
+          \property QSwipeCheckbox::inactivePaddingColor()
+        \brief This property...
+
+    */
+
+    /*!
+          \property QSwipeCheckbox::shadowColor()
+        \brief This property...
+
+    */
+
+    /*!
+          \property QSwipeCheckbox::paddingWidth()
+        \brief This property...
+
+    */
+
+    /*!
+          \property QSwipeCheckbox::shadowOpacity()
+        \brief This property...
+
+    */
+
+    /*!
+          \property QSwipeCheckbox::shadowAngle()
+        \brief This property...
+
+    */
+
+    /*!
+          \property QSwipeCheckbox::shadowSize()
+        \brief This property...
+
+    */
+
+    /*!
+          \property QSwipeCheckbox::shadowEnabled()
+        \brief This property...
+
+    */
+
+    /*!
+          \property QSwipeCheckbox::size()
+        \brief This property...
+
+    */
+
+    /*!
+          \property QSwipeCheckbox::checked()
+        \brief This property...
+
+    */
+
+    /*!
+          \property QSwipeCheckbox::displayStyle()
+        \brief This property...
+
+    */
+
+    /*!
+          \property QSwipeCheckbox::clickableArea()
+        \brief This property...
+
+    */
+
 
     this->setMouseTracking(true);
 
@@ -172,6 +261,10 @@ bool QSwipeCheckbox::checkState() const
 
 void QSwipeCheckbox::setCheckState(bool state)
 {
+    /*!
+        \fn bool QSwipeCheckbox::checkState() const
+
+    */
     m_checkState = state;
 }
 
@@ -179,6 +272,7 @@ void QSwipeCheckbox::setCheckState(Qt::CheckState state)
 {
     /*!
         \fn void QSwipeCheckbox::setCheckState(Qt::CheckState state)
+        \overload setCheckState(bool);
 
 
     */
@@ -195,7 +289,7 @@ void QSwipeCheckbox::setCheckState(int state)
 {
     /*!
         \fn void QSwipeCheckbox::setCheckState(int state)
-
+        \overload setCheckState(bool);
 
     */
     if (state == Qt::Unchecked) {
@@ -520,6 +614,11 @@ void QSwipeCheckbox::setInactivePaddingColor(QColor color)
 
 void QSwipeCheckbox::setShadowColor(QColor color)
 {
+    /*!
+        \fn void QSwipeCheckbox::setShadowColor(QColor color)
+
+
+    */
     if (color.isValid()) {
         m_shadowColor = color;
     }
@@ -685,6 +784,11 @@ QColor QSwipeCheckbox::getInactivePaddingColor() const
 
 QColor QSwipeCheckbox::getShadowColor() const
 {
+    /*!
+        \fn QColor QSwipeCheckbox::getShadowColor(void) const
+
+
+    */
     return m_shadowColor;
 }
 
@@ -840,16 +944,31 @@ int QSwipeCheckbox::animationSpeed() const
 
 bool QSwipeCheckbox::isAnimationRunning() const
 {
+    /*!
+        \fn bool QSwipeCheckbox::isAnimationRunning(void) const
+
+        This property holds whether there are currently active animations.
+    */
     return m_animationIsRunning;
 }
 
 QSwipeCheckbox::DisplayStyle QSwipeCheckbox::getDisplayStyle() const
 {
+    /*!
+        \fn QSwipeCheckbox::DisplayStyle QSwipeCheckbox::getDisplayStyle(void) const
+
+        This function returns current the DisplayStyle.
+    */
     return m_displayStyle;
 }
 
 QString QSwipeCheckbox::getDisplayStyleName() const
 {
+    /*!
+        \fn QString QSwipeCheckbox::getDisplayStyleName(void) const
+
+        This function returns a QString-value containing the DisplayStyle name.
+    */
     if (m_displayStyle == DisplayStyle::Classic) {
         return QStringLiteral("DisplayStyle::Classic");
     } else if (m_displayStyle == DisplayStyle::iOS) {
@@ -864,11 +983,26 @@ QString QSwipeCheckbox::getDisplayStyleName() const
 
 void QSwipeCheckbox::setDisplayStyle(DisplayStyle style)
 {
+    /*!
+        \fn void QSwipeCheckbox::setDisplayStyle(DisplayStyle style)
+
+        This function sets the DisplayStyle for the widget.
+
+        \sa DisplayStyle
+    */
     m_displayStyle = style;
 }
 
 void QSwipeCheckbox::setDisplayStyle(QString style)
 {
+    /*!
+        \fn void QSwipeCheckbox::setDisplayStyle(QString style)
+        \overload QSwipeCheckbox::setDisplayStyle(DisplayStyle)
+
+        This function sets the DisplayStyle for the widget.
+
+        \sa DisplayStyle \sa QSwipeCheckbox::setDisplayStyle(DisplayStyle)
+    */
     if (style == "QSwipeCheckbox::DisplayStyle::Classic" or style == "DisplayStyle::Classic" or style == "Classic") {
         m_displayStyle = DisplayStyle::Classic;
     } else if (style == "QSwipeCheckbox::DisplayStyle::iOS" or style == "DisplayStyle::iOS" or style == "iOS") {
@@ -882,11 +1016,25 @@ void QSwipeCheckbox::setDisplayStyle(QString style)
 
 QSwipeCheckbox::ClickableArea QSwipeCheckbox::getClickableArea() const
 {
+    /*!
+        \fn QSwipeCheckbox::ClickableArea QSwipeCheckbox::getClickableArea(void) const
+
+        This function returns the current setting of which part of the widget is clickable.
+
+        \sa getClickableAreaName() \sa setClickableArea()
+    */
     return m_clickableArea;
 }
 
 QString QSwipeCheckbox::getClickableAreaName() const
 {
+    /*!
+        \fn QString QSwipeCheckbox::getClickableArea(void) const
+
+        This function returns a QString containing the current setting of which part of the widget reacts to mouse events.
+
+        \sa getClickableArea() \sa setClickableArea()
+    */
     if (m_clickableArea == ClickableArea::Full) {
         return QStringLiteral("ClickableArea::Full");
     } else if (m_clickableArea == ClickableArea::Handle) {
@@ -899,11 +1047,26 @@ QString QSwipeCheckbox::getClickableAreaName() const
 
 void QSwipeCheckbox::setClickableArea(QSwipeCheckbox::ClickableArea area)
 {
+    /*!
+        \fn void QSwipeCheckbox::setClickableArea(QSwipeCheckbox::ClickableArea area)
+
+        This function sets the area that reacts to mouse events for the widget.
+
+        \sa ClickableArea \sa setClickableArea(QString)
+    */
     m_clickableArea = area;
 }
 
 void QSwipeCheckbox::setClickableArea(QString area)
 {
+    /*!
+        \fn void QSwipeCheckbox::setClickableArea(QString area)
+        \overload QSwipeCheckbox::setClickableArea(QSwipeCheckbox::ClickableArea)
+
+        This function sets the area that reacts to mouse events for the widget.
+
+        \sa setClickableArea(QSwipeCheckbox::ClickableArea)
+    */
     if (area == "QSwipeCheckbox::ClickableArea::Full" or area == "ClickableArea::Full" or area == "Full") {
         m_clickableArea = ClickableArea::Full;
     } else if (area == "QSwipeCheckbox::ClickableArea::Handle" or area == "ClickableArea::Handle" or area == "Handle") {
@@ -915,11 +1078,23 @@ void QSwipeCheckbox::setClickableArea(QString area)
 
 QPainterPath QSwipeCheckbox::customClickableArea() const
 {
+    /*!
+        \fn QPainterPath QSwipeCheckbox::customClickableArea() const
+
+        This function returns the QPainterPath which contains the area within the widget that reacts to mouse events.
+        \sa setCustomClickableArea()
+    */
     return m_customMouseRegion;
 }
 
 void QSwipeCheckbox::setCustomClickableArea(QPainterPath &ppath)
 {
+    /*!
+        \fn void QSwipeCheckbox::setCustomClickableArea(QPainterPath &ppath)
+
+        This function sets the QPainterPath containing the area within the widget supposed to react to mouse events.
+        \sa customClickableArea()
+    */
     if (!ppath.isEmpty()) {
         m_customMouseRegion = ppath;
         this->repaint();
@@ -928,11 +1103,25 @@ void QSwipeCheckbox::setCustomClickableArea(QPainterPath &ppath)
 
 int QSwipeCheckbox::shadowOpacity() const
 {
+    /*!
+      \fn int QSwipeCheckbox::shadowOpacity() const
+
+      This function returns the shadow opacity.
+
+      \sa setShadowOpacity(int)
+    */
     return m_shadowOpacity;
 }
 
 void QSwipeCheckbox::setShadowOpacity(int opacity)
 {
+    /*!
+      \fn void QSwipeCheckbox::setShadowOpacity(int opacity)
+
+      This function sets the shadow opacity (range from 0 \i{transparent} to 100 \i{opaque}).
+
+      \sa shadowOpacity()
+    */
     if (opacity >= 100) {
         m_shadowOpacity = 100;
     } else if (opacity <= 0) {
@@ -944,11 +1133,25 @@ void QSwipeCheckbox::setShadowOpacity(int opacity)
 
 int QSwipeCheckbox::getShadowSize() const
 {
+    /*!
+      \fn int QSwipeCheckbox::getShadowSize() const
+
+      This function returns the shadow size.
+
+      \sa setShadowSize(int)
+    */
     return m_shadowSize;
 }
 
 void QSwipeCheckbox::setShadowSize(int size)
 {
+    /*!
+      \fn void QSwipeCheckbox::setShadowSize(int size)
+
+      This function sets the shadow size in pixels.
+
+      \sa getShadowSize()
+    */
     if (size > 0) {
         m_shadowSize = size;
     } else if (size == 0) {
@@ -958,11 +1161,25 @@ void QSwipeCheckbox::setShadowSize(int size)
 
 int QSwipeCheckbox::getShadowAngle() const
 {
+    /*!
+      \fn int QSwipeCheckbox::getShadowAngle() const
+
+      This function returns the angle of the shadow effect.
+
+      \sa setShadowAngle(int)
+    */
     return m_shadowAngle;
 }
 
 void QSwipeCheckbox::setShadowAngle(int angle)
 {
+    /*!
+      \fn void QSwipeCheckbox::setShadowAngle(int angle)
+
+      This function sets the shadow angle in degrees (range from 0 to 360) where 0 equals the 12-o'clock position.
+
+      \sa getShadowAngle()
+    */
     if (angle > 359) {
         m_shadowAngle = angle % 360;
     } else if (angle < -359) {
@@ -976,18 +1193,41 @@ void QSwipeCheckbox::setShadowAngle(int angle)
 
 bool QSwipeCheckbox::shadowEnabled() const
 {
+    /*!
+      \fn bool QSwipeCheckbox::shadowEnabled() const
+
+      This function returns whether the shadow effect is enabled.
+
+      \sa setShadowEnabled(bool)
+    */
     return m_shadowEnabled;
 }
 
 void QSwipeCheckbox::setShadowEnabled(bool enabled)
 {
+    /*!
+      \fn void QSwipeCheckbox::setShadowEnabled(bool enabled)
+
+      This function enables or disables the shadow effect.
+
+      \sa shadowEnabled()
+    */
     m_shadowEnabled = enabled;
     if (enabled) { this->getShadowOffsets(); m_shadowWidget->show(); } else { m_shadowWidget->hide(); }
     this->repaint();
 }
 
+#ifdef QT_DEBUG
 void QSwipeCheckbox::visualizeCustomMouseRegion(bool enable, QColor color)
 {
+    /*!
+      \fn void QSwipeCheckbox::visualizeCustomMouseRegion(bool enable, QColor color)
+
+      This function enables or disables the rendering of a custom region (set via \f{setClickableArea}) for debugging purposes and sets the color in which the area is being highlighted.
+      \note This function is purposely included in \b{debug}-releases only.
+
+      \sa setClickableArea()
+    */
     m_visualizeCustomMouseRegion = enable;
     if (m_visualizeCustomMouseRegion) {
         if (color.isValid()) {
@@ -998,6 +1238,7 @@ void QSwipeCheckbox::visualizeCustomMouseRegion(bool enable, QColor color)
         }
     }
 }
+#endif
 
 void QSwipeCheckbox::initialize()
 {
