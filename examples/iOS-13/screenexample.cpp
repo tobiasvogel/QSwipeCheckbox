@@ -31,12 +31,9 @@ ScreenExample::ScreenExample(QWidget *parent)
 
     swipeCheckbox = new QSwipeCheckbox(this);
     swipeCheckbox->setGeometry(318,232,78,46);
-    swipeCheckbox->setActiveBackgroundColor(QColor("#49E845"));
-    swipeCheckbox->setInactiveBackgroundColor(QColor("#E3E3E3"));
-    swipeCheckbox->setActiveBorderColor(QColor("#49E845"));
-    swipeCheckbox->setInactiveBorderColor(QColor("#E3E3E3"));
-    swipeCheckbox->setActiveSwitchKnobColor(QColor("#FFFFFF"));
-    swipeCheckbox->setInactiveSwitchKnobColor(QColor("#FFFFFF"));
+    swipeCheckbox->setBackgroundColors(QColor("#49E845"), QColor("#E3E3E3"));
+    swipeCheckbox->setBorderColors(QColor("#49E845"), QColor("#E3E3E3"));
+    swipeCheckbox->setSwitchKnobColors(QColor("#FFFFFF"), QColor("#FFFFFF"));
     swipeCheckbox->setBorderWidth(3);
     swipeCheckbox->setAnimationSpeed(200);
     swipeCheckbox->setDisplayStyle(QSwipeCheckbox::DisplayStyle::iOS);

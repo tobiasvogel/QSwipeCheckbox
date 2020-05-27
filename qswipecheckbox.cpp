@@ -624,6 +624,115 @@ void QSwipeCheckbox::setShadowColor(QColor color)
     }
 }
 
+void QSwipeCheckbox::setBackgroundColors(QColor active, QColor inactive)
+{
+    /*!
+        \fn void QSwipeCheckbox::setBackgroundColors(QColor active, QColor inactive)
+
+        \sa setActiveBackgroundColor() \sa setInactiveBackgroundColor()
+    */
+    if (active.isValid()) {
+        m_activeBackgroundColor = active;
+    }
+    if (inactive.isValid()) {
+        m_inactiveBackgroundColor = inactive;
+    }
+    if (active.isValid() or inactive.isValid()) {
+        resetColors();
+    }
+}
+
+void QSwipeCheckbox::setTextColors(QColor active, QColor inactive)
+{
+    /*!
+        \fn void QSwipeCheckbox::setTextColors(QColor active, QColor inactive)
+
+        \sa setActiveTextColor() \sa setInactiveTextColor()
+    */
+    if (active.isValid()) {
+        m_activeTextColor = active;
+    }
+    if (inactive.isValid()) {
+        m_inactiveTextColor = inactive;
+    }
+    if (active.isValid() or inactive.isValid()) {
+        resetColors();
+    }
+}
+
+void QSwipeCheckbox::setBorderColors(QColor active, QColor inactive)
+{
+    /*!
+        \fn void QSwipeCheckbox::setBorderColors(QColor active, QColor inactive)
+
+        \sa setActiveBorderColor() \sa setInactiveBorderColor()
+    */
+    if (active.isValid()) {
+        m_activeBorderColor = active;
+    }
+    if (inactive.isValid()) {
+        m_inactiveBorderColor = inactive;
+    }
+    if (active.isValid() or inactive.isValid()) {
+        resetColors();
+    }
+}
+
+void QSwipeCheckbox::setSwitchBorderColors(QColor active, QColor inactive)
+{
+    /*!
+        \fn void QSwipeCheckbox::setSwitchKnobBorderColors(QColor active, QColor inactive)
+
+        \sa setActiveSwitchBorderColor() \sa setInactiveSwitchBorderColor()
+    */
+    if (active.isValid()) {
+        m_activeSwitchBorderColor = active;
+    }
+    if (inactive.isValid()) {
+        m_inactiveSwitchBorderColor = inactive;
+    }
+    if (active.isValid() or inactive.isValid()) {
+        resetColors();
+    }
+}
+
+void QSwipeCheckbox::setSwitchKnobColors(QColor active, QColor inactive)
+{
+    /*!
+        \fn void QSwipeCheckbox::setSwitchKnobColors(QColor active, QColor inactive)
+
+        \sa setActiveSwitchKnobColor() \sa setInactiveSwitchKnobColor()
+    */
+    if (active.isValid()) {
+        m_activeSwitchKnobColor = active;
+    }
+    if (inactive.isValid()) {
+        m_inactiveSwitchKnobColor = inactive;
+    }
+    if (active.isValid() or inactive.isValid()) {
+        resetColors();
+    }
+}
+
+void QSwipeCheckbox::setPaddingColors(QColor active, QColor inactive)
+{
+    /*!
+        \fn void QSwipeCheckbox::setPaddingColors(QColor active, QColor inactive)
+
+
+        \sa setActivePaddingColor() \sa setInactivePaddingColor()
+    */
+    if (active.isValid()) {
+        m_activePaddingColor = active;
+    }
+    if (inactive.isValid()) {
+        m_inactivePaddingColor = inactive;
+    }
+    if (active.isValid() or inactive.isValid()) {
+        resetColors();
+    }
+}
+
 void QSwipeCheckbox::setRenderBackgroundColor(QColor color)
 {
     m_renderBackgroundColor = color;

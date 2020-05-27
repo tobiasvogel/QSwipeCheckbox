@@ -163,6 +163,14 @@ public:
     void setInactivePaddingColor(QColor color);
     void setShadowColor(QColor color);
 
+    void setBackgroundColors(QColor active, QColor inactive);
+    void setTextColors(QColor active, QColor inactive);
+    void setBorderColors(QColor active, QColor inactive);
+    void setSwitchBorderColors(QColor active, QColor inactive);
+    void setSwitchKnobColors(QColor active, QColor inactive);
+    void setPaddingColors(QColor active, QColor inactive);
+
+
     QColor getActiveBackgroundColor(void) const;
     QColor getActiveTextColor(void) const;
     QColor getInactiveBackgroundColor(void) const;
