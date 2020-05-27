@@ -1,0 +1,193 @@
+/*!
+
+\page propertiestable.html
+\title Properties vs. DisplayStyle
+
+\raw HTML
+<style type="text/css">
+table td { text-align: center; }
+table tr td:first-of-type { text-align: left; }
+</style>
+\endraw
+
+\table
+\header
+	\li Property
+	\li {4,1} DisplayStyle
+\row
+	\li
+	\li \b{Classic}
+	\li \b{iOS}
+	\li \b{Material}
+	\li \b{Windows}
+\row
+	\li \l{QSwipeCheckbox::activeBackgroundColor}
+	\li X
+	\li X
+	\li X
+	\li X
+
+\row
+	\li \l{QSwipeCheckbox::inactiveBackgroundColor}
+	\li X
+	\li X
+	\li X
+	\li X
+
+\row
+	\li \l{QSwipeCheckbox::activeTextColor}
+	\li X
+	\li ---
+	\li ---
+	\li X
+
+\row
+	\li \l{QSwipeCheckbox::inactiveTextColor}
+	\li X
+	\li ---
+	\li ---
+	\li X
+
+\row
+	\li \l{QSwipeCheckbox::activeBorderColor}
+	\li X
+	\li X
+	\li ---
+	\li X
+
+\row
+	\li \l{QSwipeCheckbox::inactiveBorderColor}
+	\li X
+	\li X
+	\li ---
+	\li X
+
+\row
+	\li \l{QSwipeCheckbox::activeSwitchBorderColor}
+	\li X
+	\li ---
+	\li ---
+	\li ---
+
+\row
+	\li \l{QSwipeCheckbox::inactiveSwitchBorderColor}
+	\li X
+	\li ---
+	\li ---
+	\li ---
+
+\row
+	\li \l{QSwipeCheckbox::activeSwitchKnobColor}
+	\li X
+	\li X
+	\li X
+	\li X
+
+\row
+	\li \l{QSwipeCheckbox::inactiveSwitchKnobColor}
+	\li X
+	\li X
+	\li X
+	\li X
+
+\row
+	\li \l{QSwipeCheckbox::activePaddingColor}
+	\li ---
+	\li ---
+	\li ---
+	\li X
+
+\row
+	\li \l{QSwipeCheckbox::inactivePaddingColor}
+	\li ---
+	\li ---
+	\li ---
+	\li X
+
+\row
+	\li \l{QSwipeCheckbox::shadowColor}
+	\li ---
+	\li X
+	\li X
+	\li ---
+
+\row
+	\li \l{QSwipeCheckbox::activeText}
+	\li X
+	\li ---
+	\li ---
+	\li X
+
+\row
+	\li \l{QSwipeCheckbox::inactiveText}
+	\li X
+	\li ---
+	\li ---
+	\li X
+
+\row
+	\li \l{QSwipeCheckbox::borderWidth}
+	\li X
+	\li X
+	\li X
+	\li X
+
+\row
+	\li \l{QSwipeCheckbox::paddingWidth}
+	\li ---
+	\li ---
+	\li X
+	\li X
+
+\row
+
+	\li \l{QSwipeCheckbox::switchKnobSize}
+	\li X
+	\li --- \sup{1}
+	\li --- \sup{2}
+	\li X \sup{3}
+
+\row
+	\li \l{QSwipeCheckbox::shadowOpacity}
+	\li ---
+	\li X
+	\li X
+	\li ---
+
+\row
+	\li \l{QSwipeCheckbox::shadowAngle}
+	\li ---
+	\li X
+	\li X
+	\li ---
+
+\row
+	\li \l{QSwipeCheckbox::shadowSize}
+	\li ---
+	\li X
+	\li X
+	\li ---
+
+\row
+	\li \l{QSwipeCheckbox::shadowEnabled}
+	\li ---
+	\li X
+	\li X
+	\li ---
+
+\row
+	\li \l{QSwipeCheckbox::activeTextFont}
+	\li X
+	\li ---
+	\li ---
+	\li X
+
+\row
+	\li \l{QSwipeCheckbox::inactiveTextFont}
+	\li X
+	\li ---
+	\li ---
+	\li X
+\endtable
+
+*/
