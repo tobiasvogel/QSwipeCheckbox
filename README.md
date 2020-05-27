@@ -7,21 +7,21 @@ Flippable-Style Checkbox for the Qt Framework supporting different styles and lo
 ---
 
 ### "Classic" Style:
-| active | inactive |
+| inactive | active |
 |---|---|
-| | |
+| ![classic style inactive](https://github.com/tobiasvogel/QSwipeCheckbox/raw/master/docs/images/classic-style-inactive.png "Classic Style (inactive)") | ![classic style active](https://github.com/tobiasvogel/QSwipeCheckbox/raw/master/docs/images/classic-style-active.png "Classic Style (active)") |
    
 ### "iOS" Style:
-| active | inactive |
+| inactive | active |
 |---|---|
-| | |
+| ![ios style inactive](https://github.com/tobiasvogel/QSwipeCheckbox/raw/master/docs/images/ios-style-inactive.png "iOS Style (inactive)") | ![ios style active](https://github.com/tobiasvogel/QSwipeCheckbox/raw/master/docs/images/ios-style-active.png "iOS Style (active)") |
  
 ### "Material" Style:
-| active | inactive |
+| inactive | active |
 |---|---|
-| | |
+| ![material style inactive](https://github.com/tobiasvogel/QSwipeCheckbox/raw/master/docs/images/material-style-inactive.png "Material Style (inactive)") | ![material style active](https://github.com/tobiasvogel/QSwipeCheckbox/raw/master/docs/images/material-style-active.png "Material Style (active)") |
 
 ### "Windows" Style:
-| active | inactive |
+| inactive | active |
 |---|---|
-| | |
+| ![windows style inactive](https://github.com/tobiasvogel/QSwipeCheckbox/raw/master/docs/images/windows-style-inactive.png "Windows Style (inactive)") | ![windows style active](https://github.com/tobiasvogel/QSwipeCheckbox/raw/master/docs/images/windows-style-active.png "Windows Style (active)") |
