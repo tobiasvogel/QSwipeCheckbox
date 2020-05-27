@@ -71,7 +71,7 @@ docs.target = $${OUT_PWD}/docs
 
 QTWIDGETS_INCLUDE = $$system(pkg-config --cflags-only-I Qt5Widgets)
 docs.path = $$[QT_INSTALL_PLUGINS]/designer/QSwipeCheckbox/docs/
-docs.commands = QT_VERSION=$${QT_VERSION} QT_VER=$${QT_VERSION} QT_VERSION_TAG=$${QT_VERSION} BUILDDIR=$${OUT_PWD} qdoc -I $${PWD} $${QTWIDGETS_INCLUDE} $${OUT_PWD}/docs/QSwipeCheckbox.qdocconf
+docs.commands = QT_VERSION="$${QT_VERSION}" QT_VER="$${QT_VERSION}" QT_VERSION_TAG="$${QT_VERSION}" BUILDDIR="$${OUT_PWD}" qdoc -I $${PWD} $${QTWIDGETS_INCLUDE} $${OUT_PWD}/docs/QSwipeCheckbox.qdocconf
 DOCSOUTPUT = "all: docs"
 DOCSOUTPUT += $$escape_expand("\n")
 DOCSOUTPUT += "docs:"

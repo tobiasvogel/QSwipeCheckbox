@@ -17,41 +17,67 @@ QSwipeCheckbox::QSwipeCheckbox(QWidget *parent) : QWidget(parent) {
         \inmodule QtWidgets
     */
     /*!
-        \property QSwipeCheckbox::activeBackgroundColor()
+    \enum QSwipeCheckbox::DisplayStyle
+
+        This enum sets the widgets base style.
+
+        \value Classic
+            The "Classic" QSwipeCheckbox style.
+        \value iOS
+            The "iOS" QSwipeCheckbox style.
+        \value Material
+            The "Material" QSwipeCheckbox style.
+        \value Windows
+            The "Windows" QSwipeCheckbox style.
+    */
+    /*!
+    \enum QSwipeCheckbox::ClickableArea
+
+        This enum specifies which part of the widget is supposed to react to mouse events.
+
+        \value Full
+            The whole widget area is receiving mouse events.
+        \value Handle
+            The widget's knob/handle is receiving mouse events.
+        \value Custom
+            The area within the \l{QPainterPath} specified using the \l{setCustomClickableArea()} is receiving mouse events.
+    */
+    /*!
+        \property QSwipeCheckbox::activeBackgroundColor
         \brief This property holds the Background Color for the active state.
 
         \sa inactiveBackgroundColor
     */
 
     /*!
-        \property QSwipeCheckbox::inactiveBackgroundColor()
+        \property QSwipeCheckbox::inactiveBackgroundColor
         \brief This property holds the Background Color for the inactive state.
 
         \sa activeBackgroundColor
     */
 
     /*!
-        \property QSwipeCheckbox::activeTextColor()
+        \property QSwipeCheckbox::activeTextColor
         \brief This property holds the Text Color for the active state.
 
         \sa inactiveTextColor
     */
 
     /*!
-        \property QSwipeCheckbox::inactiveTextColor()
+        \property QSwipeCheckbox::inactiveTextColor
         \brief This property holds the Text Color for the inactive state.
 
         \sa activeTextColor
     */
 
     /*!
-        \property QSwipeCheckbox::activeBorderColor()
+        \property QSwipeCheckbox::activeBorderColor
         \brief This property holds the Border Color for the active state.
     */
 
     /*!
-        \property QSwipeCheckbox::inactiveBorderColor()
-        \brief This property holds the Border Color for the inctive state.
+        \property QSwipeCheckbox::inactiveBorderColor
+        \brief This property holds the Border Color for the inactive state.
     */
 
     /*!
@@ -115,99 +141,107 @@ QSwipeCheckbox::QSwipeCheckbox(QWidget *parent) : QWidget(parent) {
     */
 
     /*!
-        \property QSwipeCheckbox::checkState
-        \brief This property holds the state of the QSwipeCheckbox.
-
-        \note Any QSwipeCheckox can only be either checked (\c{true})or unchecked (\{false}). A tri-state option is \f not supported.
-    */
-
-    /*!
         \property QSwipeCheckbox::enabled
         \brief Whether the QSwipeCheckbox is enabled.
 
         This property's default is true.
     */
+
     /*!
-          \property QSwipeCheckbox::activeSwitchBorderColor()
-        \brief This property...
+        \property QSwipeCheckbox::activeSwitchBorderColor
+        \brief This property holds the border color of the knob/handle for the active state.
+
+        \sa QSwipeCheckbox::inactiveSwitchBorderColor
+    */
+
+    /*!
+        \property QSwipeCheckbox::inactiveSwitchBorderColor
+        \brief This property holds the border color of the knob/handle for the inactive state.
+
+        \sa QSwipeCheckbox::activeSwitchBorderColor
+    */
+
+    /*!
+        \property QSwipeCheckbox::activePaddingColor
+        \brief This property holds the color of the padded area for the active state.
+
+        \sa QSwipeCheckbox::inactivePaddingColor
+    */
+
+    /*!
+        \property QSwipeCheckbox::inactivePaddingColor
+        \brief This property holds the color of the padded area for the inactive state.
+
+        \sa QSwipeCheckbox::activePaddingColor
+    */
+
+    /*!
+        \property QSwipeCheckbox::shadowColor
+        \brief This property holds the shadow color of the knob/handle for styles that support a shadow-effect.
+
+        \note The alpha component of this color is ignored, as the opacity of the shadow-effect is set separately using the \l{setShadowOpacity()}-function.
+
+        \sa setShadowOpacity() shadowOpacity()
 
     */
 
     /*!
-          \property QSwipeCheckbox::inactiveSwitchBorderColor()
-        \brief This property...
+        \property QSwipeCheckbox::paddingWidth
+        \brief This property holds the width in pixels of the padded area.
+
+        \sa setPaddingWidth()
+    */
+
+    /*!
+        \property QSwipeCheckbox::shadowOpacity
+        \brief This property holds the opacity of the shadow-effect.
+
+        \sa QSwipeCheckbox::setShadowOpacity()
+    */
+
+    /*!
+        \property QSwipeCheckbox::shadowAngle
+        \brief This property holds the angle od the shadow-effect in degrees.
+
+        \sa QSwipeCheckbox::setShadowAngle()
 
     */
 
     /*!
-          \property QSwipeCheckbox::activePaddingColor()
-        \brief This property...
+        \property QSwipeCheckbox::shadowSize
+        \brief This property holds the size of the shadow-effect.
+
+        \sa setShadowSize()
+    */
+
+    /*!
+        \property QSwipeCheckbox::shadowEnabled
+        \brief This property holds whether the shadow-effect is enabled.
 
     */
 
     /*!
-          \property QSwipeCheckbox::inactivePaddingColor()
-        \brief This property...
+        \property QSwipeCheckbox::size
+        \brief This property holds the widget's size.
 
     */
 
     /*!
-          \property QSwipeCheckbox::shadowColor()
-        \brief This property...
+        \property QSwipeCheckbox::checked
+        \brief This property holds whether the QSwipeCheckbox' state is checked.
+
+        \note Any QSwipeCheckox can only be either checked (\c{true})or unchecked (\{false}). A tri-state option is \b{not supported}.
+    */
+
+    /*!
+        \property QSwipeCheckbox::displayStyle
+        \brief This property holds the \value DisplayStyle of the widget.
 
     */
 
     /*!
-          \property QSwipeCheckbox::paddingWidth()
-        \brief This property...
-
-    */
-
-    /*!
-          \property QSwipeCheckbox::shadowOpacity()
-        \brief This property...
-
-    */
-
-    /*!
-          \property QSwipeCheckbox::shadowAngle()
-        \brief This property...
-
-    */
-
-    /*!
-          \property QSwipeCheckbox::shadowSize()
-        \brief This property...
-
-    */
-
-    /*!
-          \property QSwipeCheckbox::shadowEnabled()
-        \brief This property...
-
-    */
-
-    /*!
-          \property QSwipeCheckbox::size()
-        \brief This property...
-
-    */
-
-    /*!
-          \property QSwipeCheckbox::checked()
-        \brief This property...
-
-    */
-
-    /*!
-          \property QSwipeCheckbox::displayStyle()
-        \brief This property...
-
-    */
-
-    /*!
-          \property QSwipeCheckbox::clickableArea()
-        \brief This property...
+        \property QSwipeCheckbox::clickableArea
+        \brief This property holds the \value clickableArea setting of the widget.
 
     */
 
@@ -231,10 +265,12 @@ QSwipeCheckbox::~QSwipeCheckbox() {
 QSize QSwipeCheckbox::sizeHint() const
 {
     /*!
-        \fn QSize sizeHint() const
+        \fn QSize QSwipeCheckbox::sizeHint() const
 
         Returns the recommended size for the widget.
-        \sa size \sa minimumSize \sa minimumSizeHint
+        \sa size
+        \sa minimumSize
+        \sa minimumSizeHint
     */
     return QSize(64,28);
 }
@@ -244,8 +280,8 @@ QSize QSwipeCheckbox::minimumSizeHint() const
     /*!
         \fn QSize QSwipeCheckbox::minimumSizeHint() const
 
-        This property holds the widget's minimum size.
-        \sa sizeHint
+        This function returns the widget's minimum size.
+        \sa sizeHint()
     */
     return QSize(42,18);
 }
@@ -255,6 +291,10 @@ bool QSwipeCheckbox::checkState() const
     /*!
         \fn bool QSwipeCheckbox::checkState() const
 
+        This function returns the widget's check state.
+
+        \sa isChecked()
+
     */
     return m_checkState;
 }
@@ -262,8 +302,10 @@ bool QSwipeCheckbox::checkState() const
 void QSwipeCheckbox::setCheckState(bool state)
 {
     /*!
-        \fn bool QSwipeCheckbox::checkState() const
+        \fn void QSwipeCheckbox::setCheckState(bool state)
 
+        This function sets the \a state of the widget.
+        \sa checkState()
     */
     m_checkState = state;
 }
@@ -273,7 +315,6 @@ void QSwipeCheckbox::setCheckState(Qt::CheckState state)
     /*!
         \fn void QSwipeCheckbox::setCheckState(Qt::CheckState state)
         \overload setCheckState(bool);
-
 
     */
     if (state == Qt::Checked) {
@@ -306,7 +347,7 @@ void QSwipeCheckbox::setChecked(bool checked)
     /*!
         \fn void QSwipeCheckbox::setChecked(bool checked)
 
-
+        This function sets wether the widget's state is \a{checked}.
     */
     m_checkState = checked;
     m_initialized = false;
@@ -330,9 +371,9 @@ bool QSwipeCheckbox::isChecked() const {
 bool QSwipeCheckbox::checked() const
 {
     /*!
-        \fn bool QSwipeCheckbox::checked(void)
+        \fn bool QSwipeCheckbox::checked() const
 
-
+        This function returns the widget's check state.
     */
     return m_checkState;
 }
@@ -342,7 +383,7 @@ void QSwipeCheckbox::setEnabled(bool enabled)
     /*!
         \fn void QSwipeCheckbox::setEnabled(bool enabled)
 
-
+        This functions sets whether the widget is \a{enabled}.
     */
     m_enabled = enabled;
 }
@@ -362,25 +403,25 @@ bool QSwipeCheckbox::enabled() const
     /*!
         \fn bool QSwipeCheckbox::enabled(void) const
 
-
+        This function returns whether the widget is enabled.
     */
     return m_enabled;
 }
 
 void QSwipeCheckbox::setActiveText(QString str) {
     /*!
-        \fn void QSwipeCheckbox::setActiveText(QString text)
+        \fn void QSwipeCheckbox::setActiveText(QString str)
 
-
+        This function sets the text string \a str for the active state.
     */
     m_activeText = str;
 }
 
 void QSwipeCheckbox::setInactiveText(QString str) {
     /*!
-        \fn void QSwipeCheckbox::setInactiveText(QString text)
+        \fn void QSwipeCheckbox::setInactiveText(QString str)
 
-
+        This function sets the text string \a str for the inactive state.
     */
     m_inactiveText = str;
 }
@@ -390,7 +431,7 @@ void QSwipeCheckbox::setBorderWidth(int width)
     /*!
         \fn void QSwipeCheckbox::setBorderWidth(int width = 1)
 
-
+        This function sets the border \a width in pixels.
     */
     if (width >= 0) {
         m_borderWidth = width;
@@ -402,7 +443,7 @@ int QSwipeCheckbox::paddingWidth() const
     /*!
         \fn int QSwipeCheckbox::paddingWidth(void) const
 
-
+        This function returns the padding width in pixels.
     */
     return m_paddingWidth;
 }
@@ -410,9 +451,9 @@ int QSwipeCheckbox::paddingWidth() const
 void QSwipeCheckbox::setPaddingWidth(int width)
 {
     /*!
-        \fn void QSwipeCheckbox::setBorderWidth(int width = 1)
+        \fn void QSwipeCheckbox::setPaddingWidth(int width = 1)
 
-
+        This function sets the padding \a width in pixels.
     */
     if (width >= 0) {
         m_paddingWidth = width;
@@ -425,7 +466,7 @@ int QSwipeCheckbox::switchKnobSize() const
     /*!
         \fn int QSwipeCheckbox::switchKnobSize(void) const
 
-
+        This function returns the knob/handle's size in pixels.
     */
     return m_switchKnobSize;
 }
@@ -435,7 +476,7 @@ void QSwipeCheckbox::setSwitchKnobSize(int diameter)
     /*!
         \fn void QSwipeCheckbox::setSwitchKnobSize(int diameter = 18)
 
-
+        This function returns the knob/handle's size (\a{diameter}) in pixels.
     */
     if (diameter > 0) {
         m_switchKnobSize = diameter;
@@ -446,7 +487,7 @@ QString QSwipeCheckbox::activeText(void) const {
     /*!
         \fn QString QSwipeCheckbox::activeText(void) const
 
-
+        This function returns the text string for the active state.
     */
     return m_activeText;
 }
@@ -455,7 +496,7 @@ QString QSwipeCheckbox::inactiveText(void) const {
     /*!
         \fn QString QSwipeCheckbox::inactiveText(void) const
 
-
+        This function returns the text string for the inactive state.
     */
     return m_inactiveText;
 }
@@ -465,7 +506,7 @@ int QSwipeCheckbox::borderWidth() const
     /*!
         \fn int QSwipeCheckbox::borderWidth(void) const
 
-
+        This function returns the border width in pixels.
     */
     return m_borderWidth;
 }
@@ -475,7 +516,7 @@ void QSwipeCheckbox::setActiveBackgroundColor(QColor color)
     /*!
         \fn void QSwipeCheckbox::setActiveBackgroundColor(QColor color)
 
-
+        This function sets the background \a color for the active state.
     */
     if (color.isValid()) {
         m_activeBackgroundColor = color;
@@ -490,6 +531,7 @@ void QSwipeCheckbox::setInactiveBackgroundColor(QColor color)
         \fn void QSwipeCheckbox::setInactiveBackgroundColor(QColor color)
 
 
+        This function sets the background \a color for the inactive state.
     */
     if (color.isValid()) {
         m_inactiveBackgroundColor = color;
@@ -502,7 +544,7 @@ void QSwipeCheckbox::setActiveTextColor(QColor color)
     /*!
         \fn void QSwipeCheckbox::setActiveTextColor(QColor color)
 
-
+        This function sets the text \a color for the active state.
     */
     if (color.isValid()) {
         m_activeTextColor = color;
@@ -515,7 +557,7 @@ void QSwipeCheckbox::setInactiveTextColor(QColor color)
     /*!
         \fn void QSwipeCheckbox::setInactiveTextColor(QColor color)
 
-
+        This function sets the text \a color for the inactive state.
     */
     if (color.isValid()) {
         m_inactiveTextColor = color;
@@ -527,7 +569,7 @@ void QSwipeCheckbox::setActiveBorderColor(QColor color) {
     /*!
         \fn void QSwipeCheckbox::setActiveBorderColor(QColor color)
 
-
+        This function sets the border \a color for the active state.
     */
     if (color.isValid()) {
         m_activeBorderColor =  color;
@@ -539,7 +581,7 @@ void QSwipeCheckbox::setInactiveBorderColor(QColor color) {
     /*!
         \fn void QSwipeCheckbox::setInactiveBorderColor(QColor color)
 
-
+        This function sets the border \a color for the inactive state.
     */
     if (color.isValid()) {
         m_inactiveBorderColor =  color;
@@ -552,7 +594,7 @@ void QSwipeCheckbox::setActiveSwitchBorderColor(QColor color)
     /*!
         \fn void QSwipeCheckbox::setActiveSwitchBorderColor(QColor color)
 
-
+        This function sets the border \a color of the knob/handle for the active state.
     */
     if (color.isValid()) {
         m_activeSwitchBorderColor =  color;
@@ -565,10 +607,23 @@ void QSwipeCheckbox::setInactiveSwitchBorderColor(QColor color)
     /*!
         \fn void QSwipeCheckbox::setInactiveSwitchBorderColor(QColor color)
 
-
+        This function sets the border \a color of the knob/handle for the inactive state.
     */
     if (color.isValid()) {
         m_inactiveSwitchBorderColor =  color;
+        resetColors();
+    }
+}
+
+void QSwipeCheckbox::setActiveSwitchKnobColor(QColor color)
+{
+    /*!
+        \fn void QSwipeCheckbox::setActiveSwitchKnobColor(QColor color)
+
+        This function sets the \a color of the knob/handle for the active state.
+    */
+    if (color.isValid()) {
+        m_activeSwitchKnobColor = color;
         resetColors();
     }
 }
@@ -578,7 +633,7 @@ void QSwipeCheckbox::setInactiveSwitchKnobColor(QColor color)
     /*!
         \fn void QSwipeCheckbox::setInactiveSwitchKnobColor(QColor color)
 
-
+        This function sets the \a color of the knob/handle for the inactive state.
     */
     if (color.isValid()) {
         m_inactiveSwitchKnobColor = color;
@@ -591,6 +646,7 @@ void QSwipeCheckbox::setActivePaddingColor(QColor color)
     /*!
         \fn void QSwipeCheckbox::setActivePaddingColor(QColor color)
 
+        This function sets the \a color of the padding area for the active state.
 
     */
     if (color.isValid()) {
@@ -604,7 +660,7 @@ void QSwipeCheckbox::setInactivePaddingColor(QColor color)
     /*!
         \fn void QSwipeCheckbox::setInactivePaddingColor(QColor color)
 
-
+        This function sets the \a color of the padding area for the inactive state.
     */
     if (color.isValid()) {
         m_inactivePaddingColor = color;
@@ -617,7 +673,9 @@ void QSwipeCheckbox::setShadowColor(QColor color)
     /*!
         \fn void QSwipeCheckbox::setShadowColor(QColor color)
 
+        This function sets the \a color of the shadow-effect.
 
+        \note The alpha component of this color is ignored, as the opacity of the shadow-effect is set separately using the \l{setShadowOpacity()}-function.
     */
     if (color.isValid()) {
         m_shadowColor = color;
@@ -629,7 +687,10 @@ void QSwipeCheckbox::setBackgroundColors(QColor active, QColor inactive)
     /*!
         \fn void QSwipeCheckbox::setBackgroundColors(QColor active, QColor inactive)
 
-        \sa setActiveBackgroundColor() \sa setInactiveBackgroundColor()
+        This function is provided for convenience to combine \l{setActiveBackgroundColor()} and \l{setInactiveBackgroundColor()}.
+
+        \sa setActiveBackgroundColor()
+        \sa setInactiveBackgroundColor()
     */
     if (active.isValid()) {
         m_activeBackgroundColor = active;
@@ -647,7 +708,10 @@ void QSwipeCheckbox::setTextColors(QColor active, QColor inactive)
     /*!
         \fn void QSwipeCheckbox::setTextColors(QColor active, QColor inactive)
 
-        \sa setActiveTextColor() \sa setInactiveTextColor()
+        This function is provided for convenience to combine \l{setActiveTextColor()} and \l{setInactiveTextColor()}.
+
+        \sa setActiveTextColor()
+        \sa setInactiveTextColor()
     */
     if (active.isValid()) {
         m_activeTextColor = active;
@@ -665,7 +729,10 @@ void QSwipeCheckbox::setBorderColors(QColor active, QColor inactive)
     /*!
         \fn void QSwipeCheckbox::setBorderColors(QColor active, QColor inactive)
 
-        \sa setActiveBorderColor() \sa setInactiveBorderColor()
+        This function is provided for convenience to combine \l{setActiveBorderColor()} and \l{setInactiveBorderColor()}.
+
+        \sa setActiveBorderColor()
+        \sa setInactiveBorderColor()
     */
     if (active.isValid()) {
         m_activeBorderColor = active;
@@ -681,9 +748,12 @@ void QSwipeCheckbox::setBorderColors(QColor active, QColor inactive)
 void QSwipeCheckbox::setSwitchBorderColors(QColor active, QColor inactive)
 {
     /*!
-        \fn void QSwipeCheckbox::setSwitchKnobBorderColors(QColor active, QColor inactive)
+        \fn void QSwipeCheckbox::setSwitchBorderColors(QColor active, QColor inactive)
 
-        \sa setActiveSwitchBorderColor() \sa setInactiveSwitchBorderColor()
+        This function is provided for convenience to combine \l{setActiveSwitchBorderColor()} and \l{setInactiveSwitchBorderColor()}.
+
+        \sa setActiveSwitchBorderColor()
+        \sa setInactiveSwitchBorderColor()
     */
     if (active.isValid()) {
         m_activeSwitchBorderColor = active;
@@ -701,7 +771,10 @@ void QSwipeCheckbox::setSwitchKnobColors(QColor active, QColor inactive)
     /*!
         \fn void QSwipeCheckbox::setSwitchKnobColors(QColor active, QColor inactive)
 
-        \sa setActiveSwitchKnobColor() \sa setInactiveSwitchKnobColor()
+        This function is provided for convenience to combine \l{setActiveSwitchKnobColor()} and \l{setInactiveSwitchKnobColor()}.
+
+        \sa setActiveSwitchKnobColor()
+        \sa setInactiveSwitchKnobColor()
     */
     if (active.isValid()) {
         m_activeSwitchKnobColor = active;
@@ -719,8 +792,10 @@ void QSwipeCheckbox::setPaddingColors(QColor active, QColor inactive)
     /*!
         \fn void QSwipeCheckbox::setPaddingColors(QColor active, QColor inactive)
 
+        This function is provided for convenience to combine \l{setActivePaddingColor()} and \l{setInactivePaddingColor()}.
 
-        \sa setActivePaddingColor() \sa setInactivePaddingColor()
+        \sa setActivePaddingColor()
+        \sa setInactivePaddingColor()
     */
     if (active.isValid()) {
         m_activePaddingColor = active;
@@ -758,25 +833,12 @@ void QSwipeCheckbox::setRenderPaddingColor(QColor color)
     m_renderPaddingColor = color;
 }
 
-void QSwipeCheckbox::setActiveSwitchKnobColor(QColor color)
-{
-    /*!
-        \fn void QSwipeCheckbox::setActiveSwitchKnobColor(QColor color)
-
-
-    */
-    if (color.isValid()) {
-        m_activeSwitchKnobColor = color;
-        resetColors();
-    }
-}
-
 QColor QSwipeCheckbox::getActiveBackgroundColor() const
 {
     /*!
         \fn QColor QSwipeCheckbox::getActiveBackgroundColor(void) const
 
-
+        This function returns the background color for the active state.
     */
     return m_activeBackgroundColor;
 }
@@ -786,7 +848,7 @@ QColor QSwipeCheckbox::getActiveTextColor() const
     /*!
         \fn QColor QSwipeCheckbox::getActiveTextColor(void) const
 
-
+        This function returns the text color for the active state.
     */
     return m_activeTextColor;
 }
@@ -796,7 +858,7 @@ QColor QSwipeCheckbox::getInactiveBackgroundColor() const
     /*!
         \fn QColor QSwipeCheckbox::getInactiveBackgroundColor(void) const
 
-
+        This function returns the background color for the inactive state.
     */
     return m_inactiveBackgroundColor;
 }
@@ -806,6 +868,7 @@ QColor QSwipeCheckbox::getInactiveTextColor() const
     /*!
         \fn QColor QSwipeCheckbox::getInactiveTextColor(void) const
 
+        This function returns the text color for the inactive state.
 
     */
     return m_inactiveTextColor;
@@ -816,7 +879,7 @@ QColor QSwipeCheckbox::getActiveBorderColor() const
     /*!
         \fn QColor QSwipeCheckbox::getActiveBorderColor(void) const
 
-
+        This function returns the border color for the active state.
     */
     return m_activeBorderColor;
 }
@@ -826,7 +889,7 @@ QColor QSwipeCheckbox::getInactiveBorderColor() const
     /*!
         \fn QColor QSwipeCheckbox::getInactiveBorderColor(void) const
 
-
+        This function returns the border color for the inactive state.
     */
     return m_inactiveBorderColor;
 }
@@ -836,7 +899,7 @@ QColor QSwipeCheckbox::getActiveSwitchBorderColor() const
     /*!
         \fn QColor QSwipeCheckbox::getActiveSwitchBorderColor(void) const
 
-
+        This function returns the border color of the knob/handle for the active state.
     */
     return m_activeSwitchBorderColor;
 }
@@ -846,6 +909,7 @@ QColor QSwipeCheckbox::getInactiveSwitchBorderColor() const
     /*!
         \fn QColor QSwipeCheckbox::getInactiveSwitchBorderColor(void) const
 
+        This function returns the border color of the knob/handle for the inactive state.
 
     */
     return m_inactiveSwitchBorderColor;
@@ -856,7 +920,7 @@ QColor QSwipeCheckbox::getActiveSwitchKnobColor() const
     /*!
         \fn QColor QSwipeCheckbox::getActiveSwitchKnobColor(void) const
 
-
+        This function returns the color of the knob/handle for the active state.
     */
     return m_activeSwitchKnobColor;
 }
@@ -866,7 +930,7 @@ QColor QSwipeCheckbox::getInactiveSwitchKnobColor() const
     /*!
         \fn QColor QSwipeCheckbox::getInactiveSwitchKnobColor(void) const
 
-
+        This function returns the color of the knob/handle for the inactive state.
     */
     return m_inactiveSwitchKnobColor;
 }
@@ -876,7 +940,7 @@ QColor QSwipeCheckbox::getActivePaddingColor() const
     /*!
         \fn QColor QSwipeCheckbox::getActivePaddingColor(void) const
 
-
+        This function returns the color of the padded area for the active state.
     */
     return m_activePaddingColor;
 }
@@ -886,7 +950,7 @@ QColor QSwipeCheckbox::getInactivePaddingColor() const
     /*!
         \fn QColor QSwipeCheckbox::getInactivePaddingColor(void) const
 
-
+        This function returns the color of the padded area for the inactive state.
     */
     return m_inactivePaddingColor;
 }
@@ -896,7 +960,7 @@ QColor QSwipeCheckbox::getShadowColor() const
     /*!
         \fn QColor QSwipeCheckbox::getShadowColor(void) const
 
-
+        This function returns the color of the shadow-effect.
     */
     return m_shadowColor;
 }
@@ -930,7 +994,7 @@ void QSwipeCheckbox::setAnimationSpeed(int milliseconds) {
     /*!
         \fn void QSwipeCheckbox::setAnimationSpeed(int milliseconds = 330)
 
-
+        This function sets the animation speed (duration) in \a{milliseconds}.
     */
     if (milliseconds >= 0) {
         m_animationSpeed = milliseconds;
@@ -942,7 +1006,7 @@ QFont QSwipeCheckbox::activeTextFont() const
     /*!
         \fn QFont QSwipeCheckbox::activeTextFont(void) const
 
-
+        This function returns the font of the text for the active state.
     */
     return m_activeTextFont;
 }
@@ -952,7 +1016,7 @@ QFont QSwipeCheckbox::inactiveTextFont() const
     /*!
         \fn QFont QSwipeCheckbox::inactiveTextFont(void) const
 
-
+        This function returns the font of the text for the inactive state.
     */
     return m_inactiveTextFont;
 }
@@ -962,7 +1026,7 @@ void QSwipeCheckbox::setActiveTextFont(const QFont &font)
     /*!
         \fn void QSwipeCheckbox::setActiveTextFont(const QFont &font)
 
-
+        This function sets the \a font of the text for the active state.
     */
     m_activeTextFont = font;
 }
@@ -972,7 +1036,7 @@ void QSwipeCheckbox::setInactiveTextFont(const QFont &font)
     /*!
         \fn void QSwipeCheckbox::setInactiveTextFont(const QFont &font)
 
-
+        This function sets the \a font of the text for the inactive state.
     */
     m_inactiveTextFont = font;
 }
@@ -982,7 +1046,7 @@ void QSwipeCheckbox::setWidth(int width)
     /*!
         \fn void QSwipeCheckbox::setWidth(int width)
 
-
+        This function sets the \a width of the widget.
     */
     if (width > minimumSizeHint().width()) {
         m_size.setWidth(width);
@@ -994,7 +1058,7 @@ void QSwipeCheckbox::setHeight(int height)
     /*!
         \fn void QSwipeCheckbox::setHeight(int height)
 
-
+        This function sets the \a height of the widget.
     */
     if (height > minimumSizeHint().height()) {
         m_size.setHeight(height);
@@ -1007,6 +1071,7 @@ void QSwipeCheckbox::setSize(int width, int height)
         \fn void QSwipeCheckbox::setSize(int width, int height)
         \overload setSize(QSize)
 
+        This function sets the \a width and \a height of the widget.
     */
     if (width > minimumSizeHint().width() && height > minimumSizeHint().height()) {
         m_size.setWidth(width);
@@ -1019,7 +1084,7 @@ void QSwipeCheckbox::setSize(const QSize &size)
     /*!
         \fn void QSwipeCheckbox::setSize(const QSize &size)
 
-        Set the desired Widget size.
+        Sets the desired widget \a size.
         \sa getSize
     */
     if (size.width() > 0 && size.height() > 0) {
@@ -1033,7 +1098,7 @@ QSize QSwipeCheckbox::getSize() const
     /*!
         \fn QSize QSwipeCheckbox::getSize(void) const
 
-        This property holds the size of the Widget.
+        This function returns the size of the Widget.
     */
     return m_size;
 }
@@ -1056,7 +1121,7 @@ bool QSwipeCheckbox::isAnimationRunning() const
     /*!
         \fn bool QSwipeCheckbox::isAnimationRunning(void) const
 
-        This property holds whether there are currently active animations.
+        This function returns whether there are currently animations running.
     */
     return m_animationIsRunning;
 }
@@ -1066,7 +1131,7 @@ QSwipeCheckbox::DisplayStyle QSwipeCheckbox::getDisplayStyle() const
     /*!
         \fn QSwipeCheckbox::DisplayStyle QSwipeCheckbox::getDisplayStyle(void) const
 
-        This function returns current the DisplayStyle.
+        This function returns current the \l DisplayStyle.
     */
     return m_displayStyle;
 }
@@ -1095,7 +1160,7 @@ void QSwipeCheckbox::setDisplayStyle(DisplayStyle style)
     /*!
         \fn void QSwipeCheckbox::setDisplayStyle(DisplayStyle style)
 
-        This function sets the DisplayStyle for the widget.
+        This function sets the \l DisplayStyle \a style for the widget.
 
         \sa DisplayStyle
     */
@@ -1106,11 +1171,12 @@ void QSwipeCheckbox::setDisplayStyle(QString style)
 {
     /*!
         \fn void QSwipeCheckbox::setDisplayStyle(QString style)
-        \overload QSwipeCheckbox::setDisplayStyle(DisplayStyle)
+        \overload QSwipeCheckbox::setDisplayStyle(DisplayStyle style)
 
-        This function sets the DisplayStyle for the widget.
+        This function sets the \l DisplayStyle \a style for the widget.
 
-        \sa DisplayStyle \sa QSwipeCheckbox::setDisplayStyle(DisplayStyle)
+        \sa DisplayStyle
+        \sa QSwipeCheckbox::setDisplayStyle(QSwipeCheckbox::DisplayStyle style)
     */
     if (style == "QSwipeCheckbox::DisplayStyle::Classic" or style == "DisplayStyle::Classic" or style == "Classic") {
         m_displayStyle = DisplayStyle::Classic;
@@ -1130,7 +1196,8 @@ QSwipeCheckbox::ClickableArea QSwipeCheckbox::getClickableArea() const
 
         This function returns the current setting of which part of the widget is clickable.
 
-        \sa getClickableAreaName() \sa setClickableArea()
+        \sa getClickableAreaName()
+        \sa setClickableArea()
     */
     return m_clickableArea;
 }
@@ -1142,7 +1209,8 @@ QString QSwipeCheckbox::getClickableAreaName() const
 
         This function returns a QString containing the current setting of which part of the widget reacts to mouse events.
 
-        \sa getClickableArea() \sa setClickableArea()
+        \sa getClickableArea()
+        \sa setClickableArea()
     */
     if (m_clickableArea == ClickableArea::Full) {
         return QStringLiteral("ClickableArea::Full");
@@ -1159,9 +1227,10 @@ void QSwipeCheckbox::setClickableArea(QSwipeCheckbox::ClickableArea area)
     /*!
         \fn void QSwipeCheckbox::setClickableArea(QSwipeCheckbox::ClickableArea area)
 
-        This function sets the area that reacts to mouse events for the widget.
+        This function sets the \a area that reacts to mouse events for the widget.
 
-        \sa ClickableArea \sa setClickableArea(QString)
+        \sa ClickableArea
+        \sa setClickableArea(QString)
     */
     m_clickableArea = area;
 }
@@ -1172,7 +1241,7 @@ void QSwipeCheckbox::setClickableArea(QString area)
         \fn void QSwipeCheckbox::setClickableArea(QString area)
         \overload QSwipeCheckbox::setClickableArea(QSwipeCheckbox::ClickableArea)
 
-        This function sets the area that reacts to mouse events for the widget.
+        This function sets the \a area by a string value that reacts to mouse events for the widget.
 
         \sa setClickableArea(QSwipeCheckbox::ClickableArea)
     */
@@ -1201,7 +1270,7 @@ void QSwipeCheckbox::setCustomClickableArea(QPainterPath &ppath)
     /*!
         \fn void QSwipeCheckbox::setCustomClickableArea(QPainterPath &ppath)
 
-        This function sets the QPainterPath containing the area within the widget supposed to react to mouse events.
+        This function sets the QPainterPath (\a{ppath}) containing the area within the widget supposed to react to mouse events.
         \sa customClickableArea()
     */
     if (!ppath.isEmpty()) {
@@ -1227,7 +1296,7 @@ void QSwipeCheckbox::setShadowOpacity(int opacity)
     /*!
       \fn void QSwipeCheckbox::setShadowOpacity(int opacity)
 
-      This function sets the shadow opacity (range from 0 \i{transparent} to 100 \i{opaque}).
+      This function sets the shadow \a opacity (range from 0 \e{transparent} to 100 \e{opaque}).
 
       \sa shadowOpacity()
     */
@@ -1257,7 +1326,7 @@ void QSwipeCheckbox::setShadowSize(int size)
     /*!
       \fn void QSwipeCheckbox::setShadowSize(int size)
 
-      This function sets the shadow size in pixels.
+      This function sets the shadow \a size in pixels.
 
       \sa getShadowSize()
     */
@@ -1285,7 +1354,7 @@ void QSwipeCheckbox::setShadowAngle(int angle)
     /*!
       \fn void QSwipeCheckbox::setShadowAngle(int angle)
 
-      This function sets the shadow angle in degrees (range from 0 to 360) where 0 equals the 12-o'clock position.
+      This function sets the shadow \a angle in degrees (range from 0 to 360) where 0 equals the 12-o'clock position.
 
       \sa getShadowAngle()
     */
@@ -1317,12 +1386,18 @@ void QSwipeCheckbox::setShadowEnabled(bool enabled)
     /*!
       \fn void QSwipeCheckbox::setShadowEnabled(bool enabled)
 
-      This function enables or disables the shadow effect.
+      This function sets whether the shadow effect is \a{enabled}.
 
       \sa shadowEnabled()
     */
     m_shadowEnabled = enabled;
-    if (enabled) { this->getShadowOffsets(); m_shadowWidget->show(); } else { m_shadowWidget->hide(); }
+    if (enabled) {
+        this->getShadowOffsets();
+        m_shadowWidget->show();
+    }
+    else {
+        m_shadowWidget->hide();
+    }
     this->repaint();
 }
 
@@ -1332,7 +1407,7 @@ void QSwipeCheckbox::visualizeCustomMouseRegion(bool enable, QColor color)
     /*!
       \fn void QSwipeCheckbox::visualizeCustomMouseRegion(bool enable, QColor color)
 
-      This function enables or disables the rendering of a custom region (set via \f{setClickableArea}) for debugging purposes and sets the color in which the area is being highlighted.
+      This function sets whether the rendering of a custom region (set via \l{setClickableArea()}) is enabled (\a enable = \c true) for debugging purposes and sets the \a color in which the area is being highlighted.
       \note This function is purposely included in \b{debug}-releases only.
 
       \sa setClickableArea()
@@ -1340,10 +1415,10 @@ void QSwipeCheckbox::visualizeCustomMouseRegion(bool enable, QColor color)
     m_visualizeCustomMouseRegion = enable;
     if (m_visualizeCustomMouseRegion) {
         if (color.isValid()) {
-          m_visualizeCustomMouseRegion = true;
-          m_visualizeCustomMouseRegionColor = color;
+            m_visualizeCustomMouseRegion = true;
+            m_visualizeCustomMouseRegionColor = color;
         } else {
-          m_visualizeCustomMouseRegion = false;
+            m_visualizeCustomMouseRegion = false;
         }
     }
 }
@@ -1807,7 +1882,7 @@ void QSwipeCheckbox::paintiOSStyleSwitchElements(QPainter &p, QPainterPath &clip
                 m_shadowEffect->setColor(QColor(m_shadowColor.red(),m_shadowColor.green(),m_shadowColor.blue()));
             }
         } else {
-                m_shadowEffect->setColor(QColor(63, 63, 63, 127));
+            m_shadowEffect->setColor(QColor(63, 63, 63, 127));
         }
         m_shadowEffect->setBlurRadius((m_shadowSize>m_borderWidth?m_borderWidth:m_shadowSize));
         m_shadowEffect->setEnabled(true);
@@ -1815,15 +1890,15 @@ void QSwipeCheckbox::paintiOSStyleSwitchElements(QPainter &p, QPainterPath &clip
 
     } else {
 
-    m_shadowWidget->hide();
+        m_shadowWidget->hide();
 
-    QRectF innerKnobEllipse;
-    innerKnobEllipse.setRect(0,0,innerKnobSize,innerKnobSize);
-    innerKnobEllipse.moveCenter(QPointF(knobPosition+1,vcenter+1));
+        QRectF innerKnobEllipse;
+        innerKnobEllipse.setRect(0,0,innerKnobSize,innerKnobSize);
+        innerKnobEllipse.moveCenter(QPointF(knobPosition+1,vcenter+1));
 
-    p.drawEllipse(innerKnobEllipse);
+        p.drawEllipse(innerKnobEllipse);
 
-}
+    }
 
 
 #ifdef QT_QML_DEBUG
@@ -1883,7 +1958,7 @@ void QSwipeCheckbox::paintMaterialStyleSwitchElements(QPainter &p, QPainterPath 
                 m_shadowEffect->setColor(QColor(m_shadowColor.red(),m_shadowColor.green(),m_shadowColor.blue()));
             }
         } else {
-                m_shadowEffect->setColor(QColor(63, 63, 63, 127));
+            m_shadowEffect->setColor(QColor(63, 63, 63, 127));
         }
         m_shadowEffect->setBlurRadius((m_shadowSize>m_borderWidth?m_borderWidth:m_shadowSize));
         m_shadowEffect->setEnabled(true);
