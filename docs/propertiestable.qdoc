@@ -1,19 +1,23 @@
 /*!
 
 \page propertiestable.html
-\title Properties vs. DisplayStyle
+\title Properties / DisplayStyle
 
 \raw HTML
 <style type="text/css">
 table td { text-align: center; }
 table tr td:first-of-type { text-align: left; }
+div.footnotes { left: 20px; padding-left: 55px; }
+div.footnotes .footnote-numbers { width: 30px; float: left; }
+div.footnotes .footnote-content { width: 520px; float: left; }
+div.footnotes .clearfloat { clear: both; float: none; }
 </style>
 \endraw
 
 \table
 \header
 	\li Property
-	\li {4,1} DisplayStyle
+	\li {4,1} \l{QSwipeCheckbox::DisplayStyle}
 \row
 	\li
 	\li \b{Classic}
@@ -189,5 +193,34 @@ table tr td:first-of-type { text-align: left; }
 	\li ---
 	\li X
 \endtable
+
+\div {class="footnotes"}
+	\div {class="clearfloat"}
+	\enddiv
+	\div {class="footnote-numbers"}
+		1
+	\enddiv
+	\div {class="footnote-content"}
+		The size (diameter) of the knob/handle is the same as the \c height of the widget minus the \e{border width} set using the \l{QSwipeCheckbox::setBorderWidth()} function.
+	\enddiv
+	\div {class="clearfloat"}
+	\enddiv
+	\div {class="footnote-numbers"}
+		2
+	\enddiv
+	\div {class="footnote-content"}
+		The size (diameter) of the knob/handle is the same as the \c height of the widget minus the \e{border width} set using the \l{QSwipeCheckbox::setBorderWidth()} function.
+	\enddiv
+	\div {class="clearfloat"}
+	\enddiv
+	\div {class="footnote-numbers"}
+		3
+	\enddiv
+	\div {class="footnote-content"}
+		The \l{QSwipeCheckbox::switchKnobSize()} function sets not the \c diameter, but the \c width of the knob/handle when using \l{QSwipeCheckbox::Windows}.
+	\enddiv
+	\div {class="clearfloat"}
+	\enddiv
+\enddiv
 
 */
