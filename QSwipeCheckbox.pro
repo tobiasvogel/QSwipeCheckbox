@@ -71,11 +71,12 @@ docs.target = $${OUT_PWD}/docs
 
 QTWIDGETS_INCLUDE = $$system(pkg-config --cflags-only-I Qt5Widgets)
 docs.path = $$[QT_INSTALL_PLUGINS]/designer/QSwipeCheckbox/docs/
-docs.commands = QT_VERSION="$${QT_VERSION}" QT_VER="$${QT_VERSION}" QT_VERSION_TAG="$${QT_VERSION}" BUILDDIR="$${OUT_PWD}" qdoc -I $${PWD} $${QTWIDGETS_INCLUDE} $${OUT_PWD}/docs/QSwipeCheckbox.qdocconf
+docs.commands = QT_VERSION=\"$${QT_VERSION}\" QT_VER=\"$${QT_VERSION}\" QT_VERSION_TAG=\"$${QT_VERSION}\" BUILDDIR=\"$${OUT_PWD}\" $$[QT_INSTALL_PREFIX]/bin/qdoc $${QTWIDGETS_INCLUDE} -I$${PWD} $${OUT_PWD}/docs/QSwipeCheckbox.qdocconf
 DOCSOUTPUT = "all: docs"
 DOCSOUTPUT += $$escape_expand("\n")
 DOCSOUTPUT += "docs:"
 DOCSOUTPUT += $$escape_expand("\t$${docs.commands}")
+DOCSOUTPUT += $$escape_expand("\tfor html in html/*.html; do perl -pi -e 's,<a href=\"index.html\">Qt $${QT_VERSION}</a>,<a href=\"index.html\">Documentation</a>,g' \$\${html}; done")
 DOCSOUTPUT += $$escape_expand("\n\nclean:")
 DOCSOUTPUT += $$escape_expand("\t-rm -rf ./html")
 write_file($${OUT_PWD}/docs/Makefile, DOCSOUTPUT)

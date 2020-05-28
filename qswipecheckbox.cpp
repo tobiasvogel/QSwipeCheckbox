@@ -15,6 +15,11 @@ QSwipeCheckbox::QSwipeCheckbox(QWidget *parent) : QWidget(parent) {
 
         \ingroup basicwidgets
         \inmodule QtWidgets
+
+        \startpage index.html
+
+        \nextpage {propertiestable.html}{Properties per Style}
+        \previouspage index.html
     */
     /*!
     \enum QSwipeCheckbox::DisplayStyle

@@ -3,6 +3,10 @@
 \page propertiestable.html
 \title Properties / DisplayStyle
 
+\startpage index.html
+\previouspage index.html
+\nextpage {QSwipeCheckbox}{QSwipeCheckbox API Documentation}
+
 \raw HTML
 <style type="text/css">
 table td { text-align: center; }
@@ -222,5 +226,14 @@ div.footnotes .clearfloat { clear: both; float: none; }
 	\div {class="clearfloat"}
 	\enddiv
 \enddiv
+
+\section1 Please also refer to these diagrams
+
+\list
+\li \l{classic-properties.html}{Properties for the "Classic" DisplayStyle}
+\li \l{ios-properties.html}{Properties for the "iOS" DisplayStyle}
+\li \l{material-properties.html}{Properties for the "Material" DisplayStyle}
+\li \l{windows-properties.html}{Properties for the "Windows" DisplayStyle}
+\endlist
 
 */

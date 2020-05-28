@@ -16,5 +16,8 @@ headers.fileextensions  = "*.h"
 excludefiles		= #INPUT_DIR#/qswipecheckboxdesignerplugin.h \
 			  #INPUT_DIR#/qswipecheckboxdesignerplugin.cpp
 
+images.fileextensions.HTML	+= *.svg
+imagedirs		= #INPUT_DIR#/docs/images
+
 outputdir               = #OUTPUT_DIR#/html
 outputformats           = HTML
