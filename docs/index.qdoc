@@ -1,0 +1,81 @@
+/*!
+
+\page index.html
+
+\startpage index.html
+
+\title QSwipeCheckbox - Index
+
+\section1 Overview
+
+\subtitle QSwipeCheckbox
+
+Flippable-Style Checkbox for the Qt Framework supporting different styles and lots of customization options.
+
+\e{The following screenshots are just examples of the different styles. Each style can be individually customized!}
+
+"Classic" Style:
+\table
+\header
+  \li inactive 
+  \li active
+\row
+  \li \inlineimage classic-style-inactive.png "Classic Style (inactive)"
+  \li \inlineimage classic-style-active.png "Classic Style (active)"
+\endtable
+   
+"iOS" Style:
+\table
+\header
+  \li inactive 
+  \li active
+\row
+  \li \inlineimage ios-style-inactive.png "iOS Style (inactive)"
+  \li \inlineimage ios-style-active.png "iOS Style (active)"
+\endtable
+ 
+"Material" Style:
+\table
+\header
+  \li inactive 
+  \li active
+\row
+  \li \inlineimage material-style-inactive.png "Material Style (inactive)"
+  \li \inlineimage material-style-active.png "Material Style (active)"
+\endtable
+
+"Windows" Style:
+\table
+\header
+  \li inactive 
+  \li active
+\row
+  \li \inlineimage windows-style-inactive.png "Windows Style (inactive)"
+  \li \inlineimage windows-style-active.png "Windows Style (active)"
+\endtable
+
+\section1 API Documentation
+
+\l{QSwipeCheckbox}{API Documentation}
+
+\section1 Properties Documentation
+
+\l{propertiestable.html}{Properties per Style}
+
+\section2 "Classic" DisplayStyle
+
+\l{classic-properties.html}{Properties for the "Classic" DisplayStyle}
+
+\section2 "iOS" DisplayStyle
+
+\l{ios-properties.html}{Properties for the "iOS" DisplayStyle}
+
+\section2 "Material" DisplayStyle
+
+\l{material-properties.html}{Properties for the "Material" DisplayStyle}
+
+\section2 "Windows" DisplayStyle
+
+\l{windows-properties.html}{Properties for the "Windows" DisplayStyle}
+
+*/

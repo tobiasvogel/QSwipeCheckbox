@@ -1,0 +1,37 @@
+/*!
+
+\page material-properties.html
+\title Material-style Properties
+
+\startpage index.html
+\previouspage {propertiestable.html}{Properties per Style}
+
+\table
+\header
+
+  \li Properties
+  \li Inactive State
+  \li Active State
+
+\row
+ \li \list
+  	\li activeBackgroundColor
+ 	\li inactiveBackgroundColor
+	\li activeSwitchKnobColor
+	\li inactiveSwitchKnobColor
+	\li shadowColor
+	\li borderWidth
+	\li paddingWidth
+	\li shadowOpacity
+	\li shadowAngle
+	\li shadowSize
+	\li shadowEnabled
+     \endlist
+  \li \inlineimage material-inactive.svg "inactive state"
+  \li \inlineimage material-active.svg "active state"
+
+\endtable
+
+\warning For the full Material-style experience, there is a shadow-effect applied to the QSwipeCheckbox widget. Please be aware that the rendering of the widget may become slow on some devices using these effects enabled by the \c{setShadowEnabled( }\e{true}\c{ )} function. However, even with \c{setShadowEnabled( }\e{false}\c{ )} you will still get a very convincing QSwipeCheckbox!
+
+*/

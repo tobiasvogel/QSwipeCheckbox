@@ -1,0 +1,41 @@
+/*!
+
+\page classic-properties.html
+\title Classic-style Properties
+
+\startpage index.html
+\previouspage {propertiestable.html}{Properties per Style}
+
+\table
+\header
+
+  \li Properties
+  \li Inactive State
+  \li Active State
+
+\row
+  \li \list
+	\li activeBackgroundColor
+	\li inactiveBackgroundColor
+	\li activeTextColor
+	\li inactiveTextColor
+	\li activeBorderColor
+	\li inactiveBorderColor
+	\li activeSwitchBorderColor
+	\li inactiveSwitchBorderColor
+	\li activeSwitchKnobColor
+	\li inactiveSwitchKnobColor
+	\li activeText
+	\li inactiveText
+	\li borderWidth
+	\li switchKnobSize
+	\li activeTextFont
+	\li inactiveTextFont
+      \endlist
+
+  \li \inlineimage classic-inactive.svg "inactive state"
+  \li \inlineimage classic-active.svg "active state"
+
+\endtable
+
+*/

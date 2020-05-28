@@ -1,0 +1,41 @@
+/*!
+
+\page windows-properties.html
+\title Windows-style Properties
+
+\startpage index.html
+\previouspage {propertiestable.html}{Properties per Style}
+
+\table
+\header
+
+  \li Properties
+  \li Inactive State
+  \li Active State
+
+\row
+  \li \list
+	\li activeBackgroundColor
+	\li inactiveBackgroundColor
+	\li activeTextColor
+	\li inactiveTextColor
+	\li activeBorderColor
+	\li inactiveBorderColor
+	\li activeSwitchKnobColor
+	\li inactiveSwitchKnobColor
+	\li activePaddingColor
+	\li inactivePaddingColor
+	\li activeText
+	\li inactiveText
+	\li borderWidth
+	\li paddingWidth
+	\li switchKnobSize
+	\li activeTextFont
+	\li inactiveTextFont
+      \endlist
+  \li \inlineimage windows-inactive.svg "inactive state"
+  \li \inlineimage windows-active.svg "active state"
+
+\endtable
+
+*/
