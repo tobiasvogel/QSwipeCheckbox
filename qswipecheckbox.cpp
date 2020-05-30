@@ -1873,8 +1873,8 @@ void QSwipeCheckbox::paintiOSStyleSwitchElements(QPainter &p, QPainterPath &clip
     if (m_shadowEnabled) {
 
         m_shadowWidget->setGeometry(m_borderWidth+offset+1,m_borderWidth+1,innerKnobSize,innerKnobSize);
-        m_shadowWidget->setGradientAColor(m_renderKnobColor);
-        m_shadowWidget->setGradientBColor(m_renderKnobColor.darker(108));
+        m_shadowWidget->setGradientAColor(m_renderKnobColor.lighter(104));
+        m_shadowWidget->setGradientBColor(m_renderKnobColor.darker(104));
         m_shadowWidget->show();
 
         m_shadowEffect = new QGraphicsDropShadowEffect(this);

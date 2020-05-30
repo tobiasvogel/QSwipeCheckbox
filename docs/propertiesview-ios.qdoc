@@ -34,6 +34,10 @@
 
 \endtable
 
+\note The gradient on the knob/handle is defined by setting a single color only (\c{activeSwitchKnobColor} and \c{activeSwitchKnobColor} respectively). The gradient colors are then internally calculated using a \e{lighter tone by 4%} for the \e{top} gradient color and a \e{darker tone by 4%} for the \e{bottom} gradient color.
+
+\note The gradient is enabled or disabled alongside the shadow-effect. Setting \e{shadowEnabled} therefore simultaneously sets whether the gradient is applied.
+
 \warning For the full iOS-like experience, there is a subtile color-gradient and a shadow-effect applied to the QSwipeCheckbox widget. Please be aware that the rendering of the widget may become slow on some devices using these effects enabled by the \c{setShadowEnabled( }\e{true}\c{ )} function. However, even with \c{setShadowEnabled( }\e{false}\c{ )} you will still get a very convincing QSwipeCheckbox!
 
 */
