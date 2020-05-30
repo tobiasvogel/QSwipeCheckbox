@@ -20,6 +20,8 @@ QSwipeCheckbox::QSwipeCheckbox(QWidget *parent) : QWidget(parent) {
 
         \nextpage {propertiestable.html}{Properties per Style}
         \previouspage index.html
+
+        Flippable-Style Checkbox for the Qt Framework supporting different styles and lots of customization options.
     */
     /*!
     \enum QSwipeCheckbox::DisplayStyle
@@ -240,13 +242,13 @@ QSwipeCheckbox::QSwipeCheckbox(QWidget *parent) : QWidget(parent) {
 
     /*!
         \property QSwipeCheckbox::displayStyle
-        \brief This property holds the \value DisplayStyle of the widget.
+        \brief This property holds the DisplayStyle of the widget.
 
     */
 
     /*!
         \property QSwipeCheckbox::clickableArea
-        \brief This property holds the \value clickableArea setting of the widget.
+        \brief This property holds the ClickableArea setting of the widget.
 
     */
 

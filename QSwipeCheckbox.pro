@@ -71,15 +71,27 @@ docs.target = $${OUT_PWD}/docs
 
 QTWIDGETS_INCLUDE = $$system(pkg-config --cflags-only-I Qt5Widgets)
 docs.path = $$[QT_INSTALL_PLUGINS]/designer/QSwipeCheckbox/docs/
-docs.commands = QT_VERSION=\"$${QT_VERSION}\" QT_VER=\"$${QT_VERSION}\" QT_VERSION_TAG=\"$${QT_VERSION}\" BUILDDIR=\"$${OUT_PWD}\" $$[QT_INSTALL_PREFIX]/bin/qdoc $${QTWIDGETS_INCLUDE} -I$${PWD} $${OUT_PWD}/docs/QSwipeCheckbox.qdocconf
-DOCSOUTPUT = "all: docs"
+docs.commands = QT_VERSION=\"$${QT_VERSION}\" QT_VER=\"$${QT_VERSION}\" QT_VERSION_TAG=\"$${QT_VERSION}\" BUILDDIR=\"$${OUT_PWD}\" $$[QT_INSTALL_PREFIX]/bin/qdoc $${QTWIDGETS_INCLUDE} -I$${PWD} -I$$join(QMAKE_DEFAULT_INCDIRS, " -I") $${OUT_PWD}/docs/QSwipeCheckbox.qdocconf
+DOCSOUTPUT += "AUX_SIGNAL_1=<tr><td class=\"memItemLeft rightAlign topAlign\"> void <\/td><td class=\"memItemRight bottomAlign\"><b><a href=\"qswipecheckbox.html\">animationStarted<\/a><\/b>(<i>void<\/i>)<\/td><\/tr>"
+DOCSOUTPUT += "AUX_SIGNAL_2=<tr><td class=\"memItemLeft rightAlign topAlign\"> void <\/td><td class=\"memItemRight bottomAlign\"><b><a href=\"qswipecheckbox.html\">animationFinished<\/a><\/b>(<i>void<\/i>)<\/td><\/tr>"
+DOCSOUTPUT += $$escape_expand("\n")
+DOCSOUTPUT += "all: docs"
 DOCSOUTPUT += $$escape_expand("\n")
 DOCSOUTPUT += "docs:"
 DOCSOUTPUT += $$escape_expand("\t$${docs.commands}")
 DOCSOUTPUT += $$escape_expand("\tfor html in html/*.html; do perl -pi -e 's,<a href=\"index.html\">Qt $${QT_VERSION}</a>,<a href=\"index.html\">Documentation</a>,g' \$\${html}; done")
+DOCSOUTPUT += $$escape_expand("\tfor html in html/*.html; do perl -pi -e 's,<td id=\"buildversion\" width=\"100%\" align=\"right\">Qt $${QT_VERSION} Reference Documentation</td>,<td id="buildversion" width="100%" align="right">Buildversion: $${VERSION_STRING}</td>,g' \$\${html}; done")
+DOCSOUTPUT += $$escape_expand("\tperl -pi -e 's,<p class=\"naviNextPrevious headerNavi\">,<p class=\"naviNextPrevious headerNavi\" style=\"top: -22px !important;\">,g' html/qswipecheckbox.html")
+DOCSOUTPUT += $$escape_expand("\tperl -pi -e 's,<p class=\"naviNextPrevious footerNavi\">,<p class=\"naviNextPrevious footerNavi\" style=\"top: -6px !important;\">,g' html/qswipecheckbox.html")
+DOCSOUTPUT += $$escape_expand("\t")"$(eval LINEOFFSET=$(shell perl -ln -e 'print \$\$. if /id=\"signals\"/' html/qswipecheckbox.html))"
+DOCSOUTPUT += $$escape_expand("\t")"$(eval INSERTBEFORE=$(shell perl -ln -e 'print \$\$. and last  if /<\/table>/ and \$\$. > \$(LINEOFFSET)\' html/qswipecheckbox.html))"
+DOCSOUTPUT += $$escape_expand("\t")"perl -ln -e 'if ($(INSERTBEFORE) == \$\$.) { if (!(\$\$_ =~ m/table/)) { exit(1); } }' html/qswipecheckbox.html"
+DOCSOUTPUT += $$escape_expand("\t")"perl -pi -e 'if (\$\$. == $(INSERTBEFORE)) {s//$(AUX_SIGNAL_1)\n$(AUX_SIGNAL_2)\n/};' html/qswipecheckbox.html"
+DOCSOUTPUT += $$escape_expand("\tperl -pi -e 's,^<p><b>Note:<\/b>\s?(Getter|Setter).*?<\/p>,,g' html/qswipecheckbox.html")
 DOCSOUTPUT += $$escape_expand("\n\nclean:")
 DOCSOUTPUT += $$escape_expand("\t-rm -rf ./html")
 write_file($${OUT_PWD}/docs/Makefile, DOCSOUTPUT)
+
 
 QMAKE_EXTRA_TARGETS += docs version
 

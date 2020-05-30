@@ -62,19 +62,19 @@ Flippable-Style Checkbox for the Qt Framework supporting different styles and lo
 
 \l{propertiestable.html}{Properties per Style}
 
-\section2 "Classic" DisplayStyle
+\section1 "Classic" DisplayStyle
 
 \l{classic-properties.html}{Properties for the "Classic" DisplayStyle}
 
-\section2 "iOS" DisplayStyle
+\section1 "iOS" DisplayStyle
 
 \l{ios-properties.html}{Properties for the "iOS" DisplayStyle}
 
-\section2 "Material" DisplayStyle
+\section1 "Material" DisplayStyle
 
 \l{material-properties.html}{Properties for the "Material" DisplayStyle}
 
-\section2 "Windows" DisplayStyle
+\section1 "Windows" DisplayStyle
 
 \l{windows-properties.html}{Properties for the "Windows" DisplayStyle}
 
