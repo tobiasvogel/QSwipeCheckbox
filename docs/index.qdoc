@@ -14,7 +14,10 @@ Flippable-Style Checkbox for the Qt Framework supporting different styles and lo
 
 \e{The following screenshots are just examples of the different styles. Each style can be individually customized!}
 
-"Classic" Style:
+\raw HTML
+<div class="verticalspacer" style="margin-bottom: 44px;"></div>
+\endraw
+\b{"Classic" Style:}
 \table
 \header
   \li inactive 
@@ -24,7 +27,7 @@ Flippable-Style Checkbox for the Qt Framework supporting different styles and lo
   \li \inlineimage classic-style-active.png "Classic Style (active)"
 \endtable
    
-"iOS" Style:
+\b{"iOS" Style:}
 \table
 \header
   \li inactive 
@@ -34,7 +37,10 @@ Flippable-Style Checkbox for the Qt Framework supporting different styles and lo
   \li \inlineimage ios-style-active.png "iOS Style (active)"
 \endtable
  
-"Material" Style:
+\raw HTML
+<div class="pagebreak" style="page-break-after: always;"></div>
+\endraw
+\b{"Material" Style:}
 \table
 \header
   \li inactive 
@@ -44,7 +50,7 @@ Flippable-Style Checkbox for the Qt Framework supporting different styles and lo
   \li \inlineimage material-style-active.png "Material Style (active)"
 \endtable
 
-"Windows" Style:
+\b{"Windows" Style:}
 \table
 \header
   \li inactive 
